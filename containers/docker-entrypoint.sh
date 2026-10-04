@@ -1,4 +1,3 @@
-```bash
 #!/bin/bash
 set -e
 
@@ -232,4 +231,3 @@ echo "No additional command supplied."
 echo "Caido is running on port ${CAIDO_PORT}."
 
 wait "$CAIDO_PID"
-```
