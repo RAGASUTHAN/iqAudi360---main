@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — iqAudi360 Security Platform</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+  <style>
+    .auth-page {
+      display: flex;
+      min-height: 100vh;
+      width: 100vw;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 20%, rgba(0, 210, 255, 0.08) 0%, transparent 60%), #080c14;
+      padding: 24px;
+    }
+    .auth-card {
+      width: 100%;
+      max-width: 440px;
+      background: rgba(14, 21, 36, 0.9);
+      border: 1px solid rgba(0, 210, 255, 0.2);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 210, 255, 0.1);
+      backdrop-filter: blur(16px);
+      position: relative;
+      z-index: 1;
+    }
+    .auth-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .auth-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, #00d2ff 0%, #8b5cf6 100%);
+      color: #030712;
+      font-weight: 800;
+      font-size: 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 0 24px rgba(0, 210, 255, 0.4);
+    }
+    .auth-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #f1f5f9;
+      letter-spacing: -0.02em;
+    }
+    .auth-subtitle {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-top: 4px;
+    }
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .auth-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .auth-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #cbd5e1;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .auth-input {
+      background: rgba(3, 7, 18, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+      transition: var(--transition);
+    }
+    .auth-input:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 0 3px rgba(0, 210, 255, 0.2);
+    }
+    .auth-btn-primary {
+      background: linear-gradient(135deg, #00d2ff 0%, #0284c7 100%);
+      color: #030712;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 13px;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
+      margin-top: 6px;
+    }
+    .auth-btn-primary:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0, 210, 255, 0.45);
+    }
+    .auth-btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: #64748b;
+      font-size: 12px;
+      margin: 10px 0;
+    }
+    .auth-divider::before, .auth-divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .auth-divider span {
+      padding: 0 10px;
+    }
+    .auth-btn-google {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #f1f5f9;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 11px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: var(--transition);
+    }
+    .auth-btn-google:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    .auth-footer {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+    .auth-link {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    .auth-link:hover {
+      text-decoration: underline;
+    }
+    .auth-alert {
+      background: var(--sev-critical-bg);
+      border: 1px solid var(--sev-critical-border);
+      color: #fca5a5;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      margin-bottom: 16px;
+      display: none;
+    }
+  </style>
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-auth-compat.js"></script>
+  <script src="{{ url_for('static', filename='js/firebase-auth.js') }}"></script>
+</head>
+<body>
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="auth-logo">iq</div>
+        <h1 class="auth-title">iqAudi360</h1>
+        <p class="auth-subtitle">Secure Security Assessment Platform</p>
+      </div>
+
+      <div id="authAlert" class="auth-alert"></div>
+
+      <form id="loginForm" class="auth-form">
+        <div class="auth-input-group">
+          <label class="auth-label" for="loginEmail">Email Address</label>
+          <input type="email" id="loginEmail" class="auth-input" placeholder="security@enterprise.com" required autocomplete="email">
+        </div>
+
+        <div class="auth-input-group">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <label class="auth-label" for="loginPassword">Password</label>
+            <a href="{{ url_for('auth.forgot_password_page') }}" class="auth-link" style="font-size: 12px;">Forgot password?</a>
+          </div>
+          <input type="password" id="loginPassword" class="auth-input" placeholder="••••••••••••" required autocomplete="current-password">
+        </div>
+
+        <button type="submit" id="loginSubmitBtn" class="auth-btn-primary">
+          <span>LOGIN</span>
+        </button>
+      </form>
+
+      <div class="auth-divider">
+        <span>OR QUICK DEMO LOGIN</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px;">
+        <button type="button" class="demo-role-btn" data-role="SUPERADMIN" data-email="superadmin@iqaudi360.com" data-pass="SuperAdmin123!" style="background: rgba(139, 92, 246, 0.12); border: 1px solid rgba(139, 92, 246, 0.35); color: #c4b5fd; padding: 10px 14px; border-radius: var(--radius-sm); display: flex; justify-content: space-between; align-items: center; cursor: pointer; text-align: left; font-size: 13px; font-weight: 600; transition: var(--transition);">
+          <span>👑 <strong>SUPER ADMIN</strong> <small style="display: block; font-size: 11px; opacity: 0.8; font-weight: normal;">superadmin@iqaudi360.com</small></span>
+          <span style="font-size: 11px; padding: 2px 8px; border-radius: 4px; background: rgba(139, 92, 246, 0.25);">Full Access</span>
+        </button>
+
+        <button type="button" class="demo-role-btn" data-role="ADMIN" data-email="admin@alpha.com" data-pass="Admin123!" style="background: rgba(0, 210, 255, 0.12); border: 1px solid rgba(0, 210, 255, 0.35); color: #7dd3fc; padding: 10px 14px; border-radius: var(--radius-sm); display: flex; justify-content: space-between; align-items: center; cursor: pointer; text-align: left; font-size: 13px; font-weight: 600; transition: var(--transition);">
+          <span>⚡ <strong>ADMIN</strong> <small style="display: block; font-size: 11px; opacity: 0.8; font-weight: normal;">admin@alpha.com</small></span>
+          <span style="font-size: 11px; padding: 2px 8px; border-radius: 4px; background: rgba(0, 210, 255, 0.25);">Org Admin</span>
+        </button>
+
+        <button type="button" class="demo-role-btn" data-role="DEVELOPER" data-email="dev@alpha.com" data-pass="Dev123!" style="background: rgba(34, 197, 94, 0.12); border: 1px solid rgba(34, 197, 94, 0.35); color: #86efac; padding: 10px 14px; border-radius: var(--radius-sm); display: flex; justify-content: space-between; align-items: center; cursor: pointer; text-align: left; font-size: 13px; font-weight: 600; transition: var(--transition);">
+          <span>💻 <strong>DEVELOPER</strong> <small style="display: block; font-size: 11px; opacity: 0.8; font-weight: normal;">dev@alpha.com</small></span>
+          <span style="font-size: 11px; padding: 2px 8px; border-radius: 4px; background: rgba(34, 197, 94, 0.25);">Scans & Logs</span>
+        </button>
+
+        <button type="button" class="demo-role-btn" data-role="CLIENT" data-email="client@alpha.com" data-pass="Client123!" style="background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.35); color: #fcd34d; padding: 10px 14px; border-radius: var(--radius-sm); display: flex; justify-content: space-between; align-items: center; cursor: pointer; text-align: left; font-size: 13px; font-weight: 600; transition: var(--transition);">
+          <span>📊 <strong>CLIENT</strong> <small style="display: block; font-size: 11px; opacity: 0.8; font-weight: normal;">client@alpha.com</small></span>
+          <span style="font-size: 11px; padding: 2px 8px; border-radius: 4px; background: rgba(245, 158, 11, 0.25);">Reports Only</span>
+        </button>
+      </div>
+
+      <div class="auth-divider">
+        <span>OR GOOGLE SSO</span>
+      </div>
+
+      <button type="button" id="googleLoginBtn" class="auth-btn-google">
+        <svg width="18" height="18" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+        </svg>
+        <span>Continue with Google</span>
+      </button>
+
+      <div class="auth-footer">
+        Don't have an account?
+        <a href="{{ url_for('auth.register_page') }}" class="auth-link">Create Account</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const firebaseConfig = {{ firebase_config | tojson }};
+      window.__FIREBASE_CONFIG__ = firebaseConfig;
+      if (window.IqAuth && typeof window.IqAuth.init === "function") {
+        window.IqAuth.init(firebaseConfig);
+      }
+
+      const alertEl = document.getElementById("authAlert");
+      const loginForm = document.getElementById("loginForm");
+      const submitBtn = document.getElementById("loginSubmitBtn");
+      const googleBtn = document.getElementById("googleLoginBtn");
+      const demoBtns = document.querySelectorAll(".demo-role-btn");
+
+      function showAlert(msg) {
+        alertEl.textContent = msg;
+        alertEl.style.display = "block";
+      }
+
+      function hideAlert() {
+        alertEl.style.display = "none";
+      }
+
+      function redirectAfterLogin() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const nextUrl = urlParams.get("next") || "{{ url_for('dashboard') }}";
+        window.location.href = nextUrl;
+      }
+
+      async function attemptDemoLogin(email, password, role) {
+        const res = await fetch("/api/auth/demo-login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: email, password: password, role: role })
+        });
+        const data = await res.json();
+        if (!res.ok || data.status !== "ok") {
+          throw new Error(data.message || "Login failed");
+        }
+        return data;
+      }
+
+      loginForm.addEventListener("submit", async function(e) {
+        e.preventDefault();
+        hideAlert();
+
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value;
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Authenticating...";
+
+        try {
+          // 1. Try Firebase Auth
+          if (window.IqAuth) {
+            try {
+              await window.IqAuth.login(email, password);
+              redirectAfterLogin();
+              return;
+            } catch (fbErr) {
+              console.warn("Firebase login failed, trying demo login fallback:", fbErr);
+            }
+          }
+          // 2. Try demo credentials fallback
+          await attemptDemoLogin(email, password);
+          redirectAfterLogin();
+        } catch (err) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "LOGIN";
+          showAlert(err.message || "Invalid email or password");
+        }
+      });
+
+      demoBtns.forEach(btn => {
+        btn.addEventListener("click", async function() {
+          hideAlert();
+          const role = this.dataset.role;
+          const email = this.dataset.email;
+          const pass = this.dataset.pass;
+
+          document.getElementById("loginEmail").value = email;
+          document.getElementById("loginPassword").value = pass;
+
+          this.style.opacity = "0.7";
+          try {
+            await attemptDemoLogin(email, pass, role);
+            redirectAfterLogin();
+          } catch (err) {
+            this.style.opacity = "1";
+            showAlert(err.message || "Failed demo login");
+          }
+        });
+      });
+
+      if (googleBtn) {
+        googleBtn.addEventListener("click", async function() {
+          hideAlert();
+          googleBtn.disabled = true;
+
+          try {
+            await window.IqAuth.loginWithGoogle();
+            redirectAfterLogin();
+          } catch (err) {
+            googleBtn.disabled = false;
+            showAlert(window.IqAuth.formatErrorMessage(err));
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

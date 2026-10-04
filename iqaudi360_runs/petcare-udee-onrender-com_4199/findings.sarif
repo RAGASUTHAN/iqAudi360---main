@@ -1,0 +1,30 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "iqAudi360",
+          "informationUri": "https://github.com/iqaudi360/iqaudi360",
+          "rules": [],
+          "version": "1.6.2"
+        }
+      },
+      "results": [],
+      "invocations": [
+        {
+          "executionSuccessful": false,
+          "toolExecutionNotifications": [
+            {
+              "level": "warning",
+              "message": {
+                "text": "2 agent(s) did not finish cleanly (Recon & Mapping Agent, Recon & Mapping Agent — Auth Flows); any surface they held is under-covered."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} — iqAudi360{% endblock %}
+{% block page_heading %}{{ title }}{% endblock %}
+
+{% block content %}
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 50vh; text-align: center; padding: 40px;">
+  <div style="width: 72px; height: 72px; border-radius: 50%; background: var(--sev-critical-bg); border: 2px solid var(--sev-critical-border); display: flex; align-items: center; justify-content: center; font-size: 32px; color: var(--sev-critical); margin-bottom: 20px;">
+    ⚠️
+  </div>
+  <h1 style="color: #fff; font-size: 24px; font-weight: 700; margin-bottom: 12px;">{{ title }}</h1>
+  <p style="color: var(--text-muted); font-size: 15px; max-width: 500px; line-height: 1.6; margin-bottom: 24px;">
+    {{ message }}
+  </p>
+  <div style="display: flex; gap: 12px;">
+    <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Return to Dashboard</a>
+    <a href="{{ url_for('auth.logout') }}" class="btn btn-secondary">Sign Out</a>
+  </div>
+</div>
+{% endblock %}

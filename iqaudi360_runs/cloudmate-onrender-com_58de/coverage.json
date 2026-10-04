@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-01 10:40:57 UTC",
+  "run_id": "cloudmate-onrender-com_58de",
+  "run_name": "cloudmate-onrender-com_58de",
+  "scope": {
+    "targets": [
+      {
+        "type": "web_application",
+        "details": {
+          "target_url": "https://cloudmate.onrender.com/"
+        },
+        "original": "https://cloudmate.onrender.com/"
+      }
+    ],
+    "scan_mode": "deep",
+    "scope_mode": "auto",
+    "diff_scope": {
+      "active": false,
+      "mode": "auto"
+    },
+    "instruction": ""
+  },
+  "summary": {
+    "surfaces_reviewed": 0,
+    "outcomes": {},
+    "findings_filed": 0,
+    "gaps": 1
+  },
+  "machine_observed": {
+    "agents": [
+      {
+        "agent_id": "591c105f",
+        "agent_name": "Recon & Surface Mapping Agent",
+        "status": "running",
+        "skills": [
+          "reconnaissance/asset_discovery",
+          "tooling/katana",
+          "tooling/ffuf"
+        ],
+        "task": "Target: https://cloudmate.onrender.com/ (single web application, black-box, fully authorized — do not test anything outside this host).\n\nYour job is COMPREHENSIVE RECONNAISSANCE AND ATTACK-SURFACE MAPPING ONLY. Do NOT attempt exploitation or deep vuln validation — a later agent will handle that. Focus on producing a complete map others can test against.\n\nDeliverables:\n1. Technology fingerprint: server header, framework, CDN, WAF detection (wafw00f), JS libraries. Try httpx/nuclei tech detection. Note the app appears hosted on Render (onrender.com).\n2. Full content discovery (bounded): dirsearch/ffuf/katana with a solid wordlist (download a common wordlist to /home/pentester/tools/wordlists if needed, e.g. SecLists common.txt). Cap depth and duration; extract endpoint list, remove raw output when done.\n3. Crawl the application end-to-end (unauthenticated first): gospider or katana with JS parsing. Identify all pages, forms, inputs, API endpoints (look for /api/* paths).\n4. JS file analysis: find all JS bundles/scripts, enumerate API routes, secrets, endpoints, hardcoded values referenced in them.\n5. Map the application's purpose: what does the app do? Identify user flows (login? register? dashboard?), user roles, authentication model (session cookie? JWT in localStorage? OAuth?), and any visible multi-tenant features.\n6. If registration is open, create a test account (use a random email like recon+<random>@example.com) and map the AUTHENTICATED surface too: pages, API endpoints, parameters. Save any session token/cookie to a note for later agents. Do NOT perform destructive actions.\n7. Hidden parameter discovery with arjun on the main endpoints (bounded).\n8. Check for common files: robots.txt, sitemap.xml, .env, /.git, /swagger, /openapi.json, /api-docs, backup files.\n9. Note rate limiting, security headers, cookie flags, CORS configuration as observations.\n\nRecord everything durable in shared notes via create_note (endpoint inventory, tech stack, credentials, auth model, roles, JS-derived API map). Record coverage with record_coverage for each surface you assessed (recon-level, not vuln validation). When done, call agent_finish with a complete summary: attack surface map, auth model, tech stack, top candidate risk areas ranked by priority, and any obstacles.",
+        "is_root": false
+      },
+      {
+        "agent_id": "98e8ba10",
+        "agent_name": "Root Agent",
+        "status": "running",
+        "skills": [],
+        "task": "\n\nURLs: - https://cloudmate.onrender.com/",
+        "is_root": true
+      }
+    ],
+    "skills_exercised": [
+      "asset_discovery",
+      "ffuf",
+      "katana"
+    ],
+    "findings_filed": 0,
+    "source": "runtime"
+  },
+  "completeness": {
+    "complete": false,
+    "scan_status": "interrupted",
+    "exit_reason": "user_exit",
+    "caveats": [
+      "The scan ended with status 'interrupted' rather than completing, so coverage reflects only the work finished before it stopped.",
+      "2 agent(s) did not finish cleanly (Recon & Surface Mapping Agent, Root Agent); any surface they held is under-covered.",
+      "The run terminated via 'user_exit' rather than the root agent finishing, so remaining scope was not reached."
+    ]
+  },
+  "entries": [],
+  "gaps": [
+    {
+      "kind": "agent_recorded_no_coverage",
+      "agent_name": "Recon & Surface Mapping Agent",
+      "detail": "Recon & Surface Mapping Agent ran (status: running) without recording any coverage. Whatever it examined is absent from this record."
+    }
+  ]
+}

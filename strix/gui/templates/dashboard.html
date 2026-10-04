@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard — iqAudi360 Security Platform{% endblock %}
+{% block page_heading %}Security Dashboard{% endblock %}
+
+{% block header_buttons %}
+<a href="{{ url_for('new_scan') }}" class="btn btn-primary">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+  New Security Scan
+</a>
+{% endblock %}
+
+{% block content %}
+<!-- Top Stats Grid -->
+<div class="stats-grid">
+  <div class="stat-card" style="--card-accent: #3b82f6;">
+    <span class="stat-label">Total Scans</span>
+    <span class="stat-value">{{ stats.total_scans }}</span>
+    <span class="stat-sub">Historical assessments</span>
+  </div>
+
+  <div class="stat-card" style="--card-accent: #00d2ff;">
+    <span class="stat-label">Active Scans</span>
+    <span class="stat-value" style="color: {% if stats.active_scans > 0 %}#00d2ff{% else %}#fff{% endif %};">
+      {{ stats.active_scans }}
+    </span>
+    <span class="stat-sub">Currently executing</span>
+  </div>
+
+  <div class="stat-card" style="--card-accent: #ef4444;">
+    <span class="stat-label">Total Findings</span>
+    <span class="stat-value">{{ stats.total_findings }}</span>
+    <span class="stat-sub">Across all targets</span>
+  </div>
+
+  <div class="stat-card" style="--card-accent: #ef4444;">
+    <span class="stat-label">Critical Vulnerabilities</span>
+    <span class="stat-value" style="color: #ef4444;">{{ stats.critical_count }}</span>
+    <span class="stat-sub">Urgent attention</span>
+  </div>
+
+  <div class="stat-card" style="--card-accent: #f97316;">
+    <span class="stat-label">High Severity</span>
+    <span class="stat-value" style="color: #f97316;">{{ stats.high_count }}</span>
+    <span class="stat-sub">Elevated risk</span>
+  </div>
+</div>
+
+{% if stats.total_scans == 0 and not active_jobs %}
+<!-- Empty State -->
+<div class="card empty-state">
+  <div class="empty-state-icon">🛡️</div>
+  <h2 class="empty-state-title">No scans yet</h2>
+  <p class="empty-state-desc">Start your first autonomous multi-agent security assessment to discover attack surfaces and vulnerabilities.</p>
+  <a href="{{ url_for('new_scan') }}" class="btn btn-primary btn-lg">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    Start New Scan
+  </a>
+</div>
+{% else %}
+
+<!-- Main Dashboard Grid -->
+<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 30px;">
+  <!-- Recent Scans Table -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Recent Scans
+      </div>
+      <a href="{{ url_for('scans_list') }}" style="color: var(--accent-cyan); font-size: 12px; text-decoration: none; font-weight: 600;">View All &rarr;</a>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Target</th>
+            <th>Mode</th>
+            <th>Status</th>
+            <th>Findings</th>
+            <th>Duration</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for scan in stats.recent_scans %}
+          <tr>
+            <td>
+              <div style="font-weight: 600; color: #fff; max-width: 240px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                {{ scan.target }}
+              </div>
+              <div style="font-size: 11px; color: #64748b; font-family: var(--font-mono);">{{ scan.run_id }}</div>
+            </td>
+            <td>
+              <span style="font-size: 11px; text-transform: uppercase; font-weight: 600; color: #94a3b8;">
+                {{ scan.scan_mode }}
+              </span>
+            </td>
+            <td>
+              <span class="badge-status {{ scan.status }}">
+                {{ scan.status }}
+              </span>
+            </td>
+            <td>
+              <span style="font-weight: 700; color: {% if scan.findings_count > 0 %}#ef4444{% else %}#10b981{% endif %};">
+                {{ scan.findings_count }}
+              </span>
+            </td>
+            <td style="font-family: var(--font-mono); font-size: 12px;">
+              {{ scan.duration }}
+            </td>
+            <td>
+              <a href="{{ url_for('scan_view', scan_id=scan.run_id) }}" class="btn btn-secondary btn-sm">
+                View
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Findings Overview & Donut Chart -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Severity Distribution
+      </div>
+    </div>
+    <div id="dashboardSeverityChart" style="padding: 10px 0;"></div>
+    
+    <div style="border-top: 1px solid var(--border-subtle); margin-top: 20px; padding-top: 16px;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span style="color: var(--text-dim); font-size: 12px;">Total Assessed</span>
+        <span style="font-weight: 700; color: #fff;">{{ stats.total_findings }} Findings</span>
+      </div>
+      <div style="margin-top: 12px;">
+        <a href="{{ url_for('findings_catalog') }}" class="btn btn-secondary btn-sm" style="width: 100%; text-align: center;">
+          Browse All Findings Catalog
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Active Background Scans if any -->
+{% if active_jobs %}
+<div class="card" style="margin-bottom: 30px; border-color: rgba(0, 210, 255, 0.3);">
+  <div class="card-header">
+    <div class="card-title" style="color: #00d2ff;">
+      <span class="status-dot-pulse"></span>
+      Active Background Scans
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Target</th>
+          <th>Mode</th>
+          <th>Status</th>
+          <th>Logs Generated</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for job in active_jobs %}
+        <tr>
+          <td style="font-weight: 600; color: #fff;">{{ job.target }}</td>
+          <td><span style="text-transform: uppercase; font-size: 11px;">{{ job.scan_mode }}</span></td>
+          <td><span class="badge-status running">{{ job.status }}</span></td>
+          <td>{{ job.log_count }} lines</td>
+          <td>
+            <a href="{{ url_for('scan_view', scan_id=job.job_id) }}" class="btn btn-primary btn-sm">
+              Live Monitor &rarr;
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endif %}
+
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const counts = {
+      total: {{ stats.total_findings }},
+      critical: {{ stats.critical_count }},
+      high: {{ stats.high_count }},
+      medium: {{ stats.medium_count }},
+      low: {{ stats.low_count }},
+    };
+    renderSeverityDonut("dashboardSeverityChart", counts);
+  });
+</script>
+{% endblock %}

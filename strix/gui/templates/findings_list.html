@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}Findings Catalog — iqAudi360{% endblock %}
+{% block page_heading %}Vulnerability & Findings Catalog{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">Discovered Vulnerabilities</div>
+    <div style="display: flex; gap: 10px;">
+      <input 
+        type="text" 
+        id="globalFindingSearch" 
+        class="form-control" 
+        placeholder="Filter by title, CWE, or target..." 
+        style="width: 250px; padding: 6px 12px; font-size: 12px;"
+        onkeyup="filterGlobalFindings(this.value)"
+      >
+    </div>
+  </div>
+
+  {% if not findings %}
+  <div class="empty-state" style="padding: 40px;">
+    <div class="empty-state-icon">🛡️</div>
+    <h3 style="color:#fff; font-size:16px; margin-bottom:6px;">No findings recorded</h3>
+    <p style="color:#64748b; font-size:13px;">No security vulnerabilities are recorded across current scan runs.</p>
+  </div>
+  {% else %}
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Severity</th>
+          <th>Finding Title</th>
+          <th>CWE / Category</th>
+          <th>Target / Location</th>
+          <th>Source Run</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="globalFindingsTbody">
+        {% for f in findings %}
+        <tr class="global-finding-row" data-text="{{ (f.title + ' ' + f.cwe + ' ' + f.target) | lower }}">
+          <td>
+            <span class="badge badge-{{ f.severity }}">{{ f.severity | upper }}</span>
+          </td>
+          <td>
+            <strong style="color: #fff;">{{ f.title }}</strong>
+            <div style="font-size: 11px; color: #64748b; font-family: var(--font-mono);">{{ f.id }}</div>
+          </td>
+          <td>
+            <span style="font-size: 12px; color: #cbd5e1; font-family: var(--font-mono);">{{ f.cwe }}</span>
+          </td>
+          <td>
+            <span style="font-size: 12px; color: #94a3b8; font-family: var(--font-mono);">{{ f.target }}</span>
+          </td>
+          <td>
+            {% if f.run_id %}
+            <a href="{{ url_for('scan_view', scan_id=f.run_id) }}" style="color: var(--accent-cyan); text-decoration: none; font-size: 12px; font-family: var(--font-mono);">
+              {{ f.run_id }}
+            </a>
+            {% else %}
+            <span style="color: #64748b; font-size: 12px;">N/A</span>
+            {% endif %}
+          </td>
+          <td>
+            <button class="btn btn-secondary btn-sm" onclick="openFindingModal({{ f | tojson }})">
+              Details
+            </button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  function filterGlobalFindings(query) {
+    const q = (query || "").toLowerCase().trim();
+    const rows = document.querySelectorAll(".global-finding-row");
+    rows.forEach(r => {
+      const text = r.getAttribute("data-text") || "";
+      if (!q || text.includes(q)) {
+        r.style.display = "";
+      } else {
+        r.style.display = "none";
+      }
+    });
+  }
+</script>
+{% endblock %}

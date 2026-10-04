@@ -1,0 +1,416 @@
+2026-10-04 16:35:33.683 INFO    cloudmate-onrender-com_c47b - strix.core.runner: Starting iqAudi360 scan cloudmate-onrender-com_c47b (image=ghcr.io/usestrix/strix-sandbox:1.3.0, max_turns=500, interactive=False, run_dir=C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b)
+2026-10-04 16:35:33.684 INFO    cloudmate-onrender-com_c47b - strix.core.runner: LLM model resolved: openrouter/z-ai/glm-5.3
+2026-10-04 16:35:33.685 INFO    cloudmate-onrender-com_c47b - strix.core.runner: Bringing up sandbox session for scan cloudmate-onrender-com_c47b
+2026-10-04 16:35:33.685 DEBUG   cloudmate-onrender-com_c47b - strix.runtime.backends: Selected sandbox backend: docker
+2026-10-04 16:35:33.685 INFO    cloudmate-onrender-com_c47b - strix.runtime.session_manager: Creating sandbox session for scan cloudmate-onrender-com_c47b (backend=docker, image=ghcr.io/usestrix/strix-sandbox:1.3.0)
+2026-10-04 16:35:34.420 DEBUG   cloudmate-onrender-com_c47b - strix.runtime.docker_client: Creating sandbox container: image=ghcr.io/usestrix/strix-sandbox:1.3.0 caps=['NET_ADMIN', 'NET_RAW'] exposed_ports=[48080]
+2026-10-04 16:35:34.874 INFO    cloudmate-onrender-com_c47b - strix.runtime.docker_client: Sandbox container created: id=2445bb1e8b87 image=ghcr.io/usestrix/strix-sandbox:1.3.0
+2026-10-04 16:35:36.683 DEBUG   cloudmate-onrender-com_c47b - strix.runtime.session_manager: Caido host endpoint resolved: http://127.0.0.1:57672
+2026-10-04 16:35:36.683 INFO    cloudmate-onrender-com_c47b - strix.runtime.session_manager: Sandbox session for scan cloudmate-onrender-com_c47b ready and cached
+2026-10-04 16:35:36.683 INFO    cloudmate-onrender-com_c47b - strix.core.runner: Sandbox ready for scan cloudmate-onrender-com_c47b
+2026-10-04 16:35:36.718 DEBUG   cloudmate-onrender-com_c47b - strix.skills: Loaded skill: scan_modes/quick -> quick
+2026-10-04 16:35:36.720 DEBUG   cloudmate-onrender-com_c47b - strix.skills: Loaded skill: tooling/agent_browser -> agent_browser
+2026-10-04 16:35:36.724 DEBUG   cloudmate-onrender-com_c47b - strix.skills: Loaded skill: tooling/python -> python
+2026-10-04 16:35:36.747 DEBUG   cloudmate-onrender-com_c47b - strix.skills: Loaded skill: analysis/counterevidence -> counterevidence
+2026-10-04 16:35:36.770 DEBUG   cloudmate-onrender-com_c47b - strix.skills: Loaded skill: analysis/severity_calibration -> severity_calibration
+2026-10-04 16:35:36.802 DEBUG   cloudmate-onrender-com_c47b - strix.skills: Loaded skill: coordination/root_agent -> root_agent
+2026-10-04 16:35:36.803 DEBUG   cloudmate-onrender-com_c47b - strix.skills: load_skills: 6 skill(s) resolved
+2026-10-04 16:35:36.897 DEBUG   cloudmate-onrender-com_c47b - strix.agents.prompt: render_system_prompt: scan_mode=quick root=True whitebox=False skills=6 prompt_len=103718
+2026-10-04 16:35:36.898 INFO    cloudmate-onrender-com_c47b - strix.agents.factory: Built root agent 'Root Agent' (skills=0, tools=44, scan_mode=quick, whitebox=False)
+2026-10-04 16:35:36.899 INFO    cloudmate-onrender-com_c47b - strix.core.agents: agent.register 4d2188aa (Root Agent) parent=-
+2026-10-04 16:35:36.954 INFO    cloudmate-onrender-com_c47b - strix.runtime.caido_bootstrap: Bootstrapping Caido client (host=http://127.0.0.1:57672, container=http://127.0.0.1:48080)
+2026-10-04 16:35:37.066 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating trace
+2026-10-04 16:35:37.069 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Setting current trace: no-op
+2026-10-04 16:35:37.069 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:35:37.125 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:35:37.126 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 1, current_agent=Root Agent
+2026-10-04 16:35:37.126 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:35:37.131 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:35:37.132 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:35:37.136 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:35:38.004 INFO    cloudmate-onrender-com_c47b - strix.runtime.caido_bootstrap: Caido project selected: c74ef4c7-2d34-4dc8-81af-71899c119066
+2026-10-04 16:35:48.585 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791111946-bFajzVCpgq4Zyex6dpBl response_id=gen-1791111946-bFajzVCpgq4Zyex6dpBl stream=1 duration_ms=11441 ttft_ms=10929 req_bytes=235861 res_bytes=884 finish=tool_calls in=54641 out=125 cached=24640 cost=0.040986 agent=4d2188aa attempt=0
+2026-10-04 16:35:48.702 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:35:48.717 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:35:48.725 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:35:48.728 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-04 16:35:48.728 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=message class=ResponseOutputMessage
+2026-10-04 16:35:48.728 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:35:48.729 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:35:48.731 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:35:48.732 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:35:48.733 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Invoking tool get_threat_model
+2026-10-04 16:35:48.734 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Invoking tool view_agent_graph
+2026-10-04 16:35:48.734 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tool view_agent_graph completed.
+2026-10-04 16:35:48.735 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tool get_threat_model completed.
+2026-10-04 16:35:48.740 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 1 complete, next_step type=NextStepRunAgain
+2026-10-04 16:35:48.801 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 2, current_agent=Root Agent
+2026-10-04 16:35:48.801 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:35:48.811 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:35:48.812 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:35:48.820 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:36:00.710 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791111957-fHNOA2madvXtObY9ItHQ response_id=gen-1791111957-fHNOA2madvXtObY9ItHQ stream=1 duration_ms=11877 ttft_ms=9026 req_bytes=237128 res_bytes=739 finish=tool_calls in=54867 out=524 cached=54592 cost=0.012960 agent=4d2188aa attempt=0
+2026-10-04 16:36:00.780 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:36:00.786 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:36:00.804 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:36:00.809 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-04 16:36:00.809 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=message class=ResponseOutputMessage
+2026-10-04 16:36:00.809 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:36:00.816 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:36:00.827 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Invoking tool create_agent
+2026-10-04 16:36:00.875 DEBUG   cloudmate-onrender-com_c47b - strix.skills: Loaded skill: reconnaissance/asset_discovery -> asset_discovery
+2026-10-04 16:36:00.877 DEBUG   cloudmate-onrender-com_c47b - strix.skills: Loaded skill: tooling/katana -> katana
+2026-10-04 16:36:00.879 DEBUG   cloudmate-onrender-com_c47b - strix.skills: Loaded skill: tooling/ffuf -> ffuf
+2026-10-04 16:36:00.881 DEBUG   cloudmate-onrender-com_c47b - strix.skills: Loaded skill: tooling/httpx -> httpx
+2026-10-04 16:36:00.882 DEBUG   cloudmate-onrender-com_c47b - strix.skills: Loaded skill: scan_modes/quick -> quick
+2026-10-04 16:36:00.889 DEBUG   cloudmate-onrender-com_c47b - strix.skills: Loaded skill: tooling/agent_browser -> agent_browser
+2026-10-04 16:36:00.893 DEBUG   cloudmate-onrender-com_c47b - strix.skills: Loaded skill: tooling/python -> python
+2026-10-04 16:36:00.899 DEBUG   cloudmate-onrender-com_c47b - strix.skills: Loaded skill: analysis/counterevidence -> counterevidence
+2026-10-04 16:36:00.912 DEBUG   cloudmate-onrender-com_c47b - strix.skills: Loaded skill: analysis/severity_calibration -> severity_calibration
+2026-10-04 16:36:00.913 DEBUG   cloudmate-onrender-com_c47b - strix.skills: load_skills: 9 skill(s) resolved
+2026-10-04 16:36:01.009 DEBUG   cloudmate-onrender-com_c47b - strix.agents.prompt: render_system_prompt: scan_mode=quick root=False whitebox=False skills=9 prompt_len=118895
+2026-10-04 16:36:01.010 INFO    cloudmate-onrender-com_c47b - strix.agents.factory: Built child agent 'Recon & Mapping Agent' (skills=4, tools=44, scan_mode=quick, whitebox=False)
+2026-10-04 16:36:01.010 INFO    cloudmate-onrender-com_c47b - strix.core.agents: agent.register eae88d0a (Recon & Mapping Agent) parent=4d2188aa
+2026-10-04 16:36:01.022 INFO    cloudmate-onrender-com_c47b - strix.tools.agents_graph.tools: create_agent: spawned eae88d0a (Recon & Mapping Agent) parent=4d2188aa skills=4 task_len=1863
+2026-10-04 16:36:01.023 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tool create_agent completed.
+2026-10-04 16:36:01.026 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 2 complete, next_step type=NextStepRunAgain
+2026-10-04 16:36:01.074 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 3, current_agent=Root Agent
+2026-10-04 16:36:01.074 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:36:01.077 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:36:01.077 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:36:01.080 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:36:01.123 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:36:01.184 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:36:01.185 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 1, current_agent=Recon & Mapping Agent
+2026-10-04 16:36:01.187 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:36:01.191 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:36:01.192 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:36:01.196 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:36:08.992 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791111968-0ezD5ayFIbUfUDcPgO5Y response_id=gen-1791111968-0ezD5ayFIbUfUDcPgO5Y stream=1 duration_ms=7901 ttft_ms=7878 req_bytes=239793 res_bytes=698 finish=tool_calls in=55423 out=55 cached=54848 cost=0.011613 agent=4d2188aa attempt=0
+2026-10-04 16:36:09.212 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:36:09.220 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:36:09.226 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:36:09.227 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=message class=ResponseOutputMessage
+2026-10-04 16:36:09.227 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:36:09.229 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:36:09.230 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Invoking tool wait_for_agents
+2026-10-04 16:36:09.230 INFO    cloudmate-onrender-com_c47b - strix.core.agents: agent.status 4d2188aa=waiting
+2026-10-04 16:36:18.474 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791111974-lxuCbJQsFlP669go2sPz response_id=gen-1791111974-lxuCbJQsFlP669go2sPz stream=1 duration_ms=17262 ttft_ms=15962 req_bytes=248241 res_bytes=856 finish=tool_calls in=58571 out=119 cached=10432 cost=0.070631 agent=eae88d0a attempt=0
+2026-10-04 16:36:18.593 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:36:18.604 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:36:18.609 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:36:18.610 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-04 16:36:18.610 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=message class=ResponseOutputMessage
+2026-10-04 16:36:18.611 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:36:18.611 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:36:18.612 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:36:18.612 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:36:18.619 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Invoking tool get_threat_model
+2026-10-04 16:36:18.622 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tool get_threat_model completed.
+2026-10-04 16:36:18.748 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 1 complete, next_step type=NextStepRunAgain
+2026-10-04 16:36:18.800 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 2, current_agent=Recon & Mapping Agent
+2026-10-04 16:36:18.802 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:36:18.806 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:36:18.807 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:36:18.810 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:36:24.594 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791111984-xNxXDobk9X15BN9PaUeB response_id=gen-1791111984-xNxXDobk9X15BN9PaUeB stream=1 duration_ms=5777 ttft_ms=5762 req_bytes=249452 res_bytes=680 finish=tool_calls in=58799 out=30 cached=58560 cost=0.015692 agent=eae88d0a attempt=0
+2026-10-04 16:36:24.648 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:36:24.658 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:36:24.661 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:36:24.662 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:36:24.664 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:36:24.841 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 2 complete, next_step type=NextStepRunAgain
+2026-10-04 16:36:24.893 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 3, current_agent=Recon & Mapping Agent
+2026-10-04 16:36:24.893 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:36:24.895 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:36:24.895 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:36:24.900 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:36:36.756 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791111996-SbUWnKX3DYCBSYYyDhlZ response_id=gen-1791111996-SbUWnKX3DYCBSYYyDhlZ stream=1 duration_ms=11849 ttft_ms=11503 req_bytes=249813 res_bytes=682 finish=tool_calls in=58860 out=63 cached=58816 cost=0.015631 agent=eae88d0a attempt=0
+2026-10-04 16:36:36.821 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:36:36.827 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:36:36.835 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:36:36.836 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:36:36.837 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:36:37.044 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 3 complete, next_step type=NextStepRunAgain
+2026-10-04 16:36:37.093 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 4, current_agent=Recon & Mapping Agent
+2026-10-04 16:36:37.094 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:36:37.102 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:36:37.104 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:36:37.107 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:36:54.728 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791112008-U68StKNnZltu9w57gTPR response_id=gen-1791112008-U68StKNnZltu9w57gTPR stream=1 duration_ms=17606 ttft_ms=17453 req_bytes=250292 res_bytes=680 finish=tool_calls in=58957 out=30 cached=58880 cost=0.015549 agent=eae88d0a attempt=0
+2026-10-04 16:36:54.825 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:36:54.840 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:36:54.853 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:36:54.853 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:36:54.855 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:36:55.003 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 4 complete, next_step type=NextStepRunAgain
+2026-10-04 16:36:55.051 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 5, current_agent=Recon & Mapping Agent
+2026-10-04 16:36:55.051 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:36:55.053 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:36:55.053 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:36:55.056 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:37:03.914 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791112023-3iLIvhlpe3x84TgG92l0 response_id=gen-1791112023-3iLIvhlpe3x84TgG92l0 stream=1 duration_ms=8846 ttft_ms=8462 req_bytes=250652 res_bytes=683 finish=tool_calls in=59018 out=101 cached=58944 cost=0.015873 agent=eae88d0a attempt=0
+2026-10-04 16:37:04.017 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:37:04.023 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:37:04.034 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:37:04.036 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:37:04.037 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:04.172 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 5 complete, next_step type=NextStepRunAgain
+2026-10-04 16:37:04.217 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 6, current_agent=Recon & Mapping Agent
+2026-10-04 16:37:04.217 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:04.219 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:37:04.219 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:04.222 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:37:13.912 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791112033-yAC4F7ZYMQwo9XakbIYW response_id=gen-1791112033-yAC4F7ZYMQwo9XakbIYW stream=1 duration_ms=9681 ttft_ms=9588 req_bytes=251242 res_bytes=681 finish=tool_calls in=59152 out=30 cached=59072 cost=0.015603 agent=eae88d0a attempt=0
+2026-10-04 16:37:13.958 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:37:13.968 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:37:13.970 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:37:13.971 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:37:13.971 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:14.116 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 6 complete, next_step type=NextStepRunAgain
+2026-10-04 16:37:14.158 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 7, current_agent=Recon & Mapping Agent
+2026-10-04 16:37:14.159 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:14.164 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:37:14.165 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:14.168 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:37:19.557 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791112038-jJSEMSVcJvG1A0DJKMBO response_id=gen-1791112038-jJSEMSVcJvG1A0DJKMBO stream=1 duration_ms=5376 ttft_ms=4717 req_bytes=251603 res_bytes=726 finish=tool_calls in=59214 out=120 cached=59136 cost=0.016013 agent=eae88d0a attempt=0
+2026-10-04 16:37:19.652 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:37:19.664 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:37:19.669 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:37:19.670 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-04 16:37:19.671 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=message class=ResponseOutputMessage
+2026-10-04 16:37:19.671 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:37:19.675 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:19.789 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 7 complete, next_step type=NextStepRunAgain
+2026-10-04 16:37:19.835 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 8, current_agent=Recon & Mapping Agent
+2026-10-04 16:37:19.835 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:19.837 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:37:19.839 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:19.846 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:37:24.677 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791112044-gzpehVNPeNJcv2ksJQ4C response_id=gen-1791112044-gzpehVNPeNJcv2ksJQ4C stream=1 duration_ms=4819 ttft_ms=4714 req_bytes=252171 res_bytes=680 finish=tool_calls in=59329 out=30 cached=59200 cost=0.015705 agent=eae88d0a attempt=0
+2026-10-04 16:37:24.730 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:37:24.734 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:37:24.741 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:37:24.742 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:37:24.745 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:24.869 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 8 complete, next_step type=NextStepRunAgain
+2026-10-04 16:37:24.916 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 9, current_agent=Recon & Mapping Agent
+2026-10-04 16:37:24.916 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:24.919 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:37:24.921 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:24.927 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:37:27.075 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791112046-WeocBp1VhBMiuG1xfn9a response_id=gen-1791112046-WeocBp1VhBMiuG1xfn9a stream=1 duration_ms=2139 ttft_ms=1904 req_bytes=252532 res_bytes=682 finish=tool_calls in=59392 out=66 cached=59328 cost=0.015805 agent=eae88d0a attempt=0
+2026-10-04 16:37:27.119 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:37:27.131 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:37:27.133 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:37:27.134 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:37:27.135 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:27.267 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 9 complete, next_step type=NextStepRunAgain
+2026-10-04 16:37:27.331 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 10, current_agent=Recon & Mapping Agent
+2026-10-04 16:37:27.332 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:27.335 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:37:27.336 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:27.343 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:37:29.014 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791112048-XuqeZr4p8Ysof2B61uQK response_id=gen-1791112048-XuqeZr4p8Ysof2B61uQK stream=1 duration_ms=1653 ttft_ms=1358 req_bytes=253033 res_bytes=681 finish=tool_calls in=59491 out=29 cached=59456 cost=0.015635 agent=eae88d0a attempt=0
+2026-10-04 16:37:29.095 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:37:29.100 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:37:29.106 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:37:29.107 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:37:29.109 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:29.229 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 10 complete, next_step type=NextStepRunAgain
+2026-10-04 16:37:29.274 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 11, current_agent=Recon & Mapping Agent
+2026-10-04 16:37:29.275 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:29.278 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:37:29.279 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:29.283 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:37:30.845 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791112050-wLB01cUvxb5118bL8KKR response_id=gen-1791112050-wLB01cUvxb5118bL8KKR stream=1 duration_ms=1548 ttft_ms=1226 req_bytes=253394 res_bytes=682 finish=tool_calls in=59552 out=74 cached=59456 cost=0.015919 agent=eae88d0a attempt=0
+2026-10-04 16:37:30.931 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:37:30.945 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:37:30.949 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:37:30.950 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:37:30.952 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:31.090 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 11 complete, next_step type=NextStepRunAgain
+2026-10-04 16:37:31.152 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 12, current_agent=Recon & Mapping Agent
+2026-10-04 16:37:31.157 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:31.168 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:37:31.169 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:31.183 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:37:35.812 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791112055-huMxMSwIfZcqwkY2d3pg response_id=gen-1791112055-huMxMSwIfZcqwkY2d3pg stream=1 duration_ms=4616 ttft_ms=4519 req_bytes=253882 res_bytes=681 finish=tool_calls in=59659 out=29 cached=59584 cost=0.015724 agent=eae88d0a attempt=0
+2026-10-04 16:37:35.899 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:37:35.911 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:37:35.915 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:37:35.916 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:37:35.918 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:36.024 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 12 complete, next_step type=NextStepRunAgain
+2026-10-04 16:37:36.072 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 13, current_agent=Recon & Mapping Agent
+2026-10-04 16:37:36.073 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:36.079 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:37:36.079 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:36.082 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:37:47.429 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791112066-3QGc6UZiRrKKMIEiXPf8 response_id=gen-1791112066-3QGc6UZiRrKKMIEiXPf8 stream=1 duration_ms=11332 ttft_ms=10995 req_bytes=254243 res_bytes=682 finish=tool_calls in=59722 out=90 cached=59648 cost=0.016008 agent=eae88d0a attempt=0
+2026-10-04 16:37:47.532 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:37:47.545 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:37:47.554 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:37:47.557 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:37:47.561 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:47.692 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 13 complete, next_step type=NextStepRunAgain
+2026-10-04 16:37:47.738 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 14, current_agent=Recon & Mapping Agent
+2026-10-04 16:37:47.739 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:47.743 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:37:47.744 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:37:47.747 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:38:00.294 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791112080-mEmxRn5DUzGEoNILvrGq response_id=gen-1791112080-mEmxRn5DUzGEoNILvrGq stream=1 duration_ms=12541 ttft_ms=12514 req_bytes=254877 res_bytes=681 finish=tool_calls in=59846 out=30 cached=59776 cost=0.015772 agent=eae88d0a attempt=0
+2026-10-04 16:38:00.344 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:38:00.351 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:38:00.358 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:38:00.359 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:38:00.361 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:00.477 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 14 complete, next_step type=NextStepRunAgain
+2026-10-04 16:38:00.522 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 15, current_agent=Recon & Mapping Agent
+2026-10-04 16:38:00.523 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:00.525 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:38:00.525 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:00.529 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:38:05.350 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791112084-uLouabr8hKjco9QCshzR response_id=gen-1791112084-uLouabr8hKjco9QCshzR stream=1 duration_ms=4807 ttft_ms=4528 req_bytes=255238 res_bytes=681 finish=tool_calls in=59907 out=23 cached=59840 cost=0.015753 agent=eae88d0a attempt=0
+2026-10-04 16:38:05.427 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:38:05.435 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:38:05.441 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:38:05.441 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:38:05.442 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:05.556 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 15 complete, next_step type=NextStepRunAgain
+2026-10-04 16:38:05.605 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 16, current_agent=Recon & Mapping Agent
+2026-10-04 16:38:05.605 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:05.608 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:38:05.608 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:05.612 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:38:10.946 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791112090-Y0oU8fBqEAKL96eG9yhl response_id=gen-1791112090-Y0oU8fBqEAKL96eG9yhl stream=1 duration_ms=5322 ttft_ms=5113 req_bytes=255604 res_bytes=681 finish=tool_calls in=59965 out=30 cached=59904 cost=0.015792 agent=eae88d0a attempt=0
+2026-10-04 16:38:11.017 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:38:11.026 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:38:11.030 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:38:11.033 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:38:11.035 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:11.142 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 16 complete, next_step type=NextStepRunAgain
+2026-10-04 16:38:11.179 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 17, current_agent=Recon & Mapping Agent
+2026-10-04 16:38:11.180 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:11.186 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:38:11.187 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:11.191 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:38:14.271 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791112093-ql4BTlI6gunLDPfE8AyJ response_id=gen-1791112093-ql4BTlI6gunLDPfE8AyJ stream=1 duration_ms=3066 ttft_ms=2561 req_bytes=255964 res_bytes=682 finish=tool_calls in=60027 out=95 cached=59968 cost=0.016092 agent=eae88d0a attempt=0
+2026-10-04 16:38:14.340 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:38:14.348 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:38:14.356 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:38:14.357 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=message class=ResponseOutputMessage
+2026-10-04 16:38:14.357 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:38:14.358 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:14.488 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 17 complete, next_step type=NextStepRunAgain
+2026-10-04 16:38:14.537 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 18, current_agent=Recon & Mapping Agent
+2026-10-04 16:38:14.537 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:14.540 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:38:14.541 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:14.544 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:38:19.420 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791112097-nacls3ssiULaV06xWw2d response_id=gen-1791112097-nacls3ssiULaV06xWw2d stream=1 duration_ms=4863 ttft_ms=3699 req_bytes=257075 res_bytes=728 finish=tool_calls in=60248 out=258 cached=60096 cost=0.016973 agent=eae88d0a attempt=0
+2026-10-04 16:38:19.476 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:38:19.488 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:38:19.490 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:38:19.492 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-04 16:38:19.492 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=message class=ResponseOutputMessage
+2026-10-04 16:38:19.492 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:38:19.493 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:19.494 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Invoking tool list_requests
+2026-10-04 16:38:19.667 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tool list_requests completed.
+2026-10-04 16:38:19.669 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 18 complete, next_step type=NextStepRunAgain
+2026-10-04 16:38:19.708 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 19, current_agent=Recon & Mapping Agent
+2026-10-04 16:38:19.709 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:19.711 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:38:19.714 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:19.720 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:38:27.157 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791112105-uJMH78JuIRDQYgHGNrqd response_id=gen-1791112105-uJMH78JuIRDQYgHGNrqd stream=1 duration_ms=7432 ttft_ms=6100 req_bytes=259790 res_bytes=727 finish=tool_calls in=61223 out=198 cached=60096 cost=0.018074 agent=eae88d0a attempt=0
+2026-10-04 16:38:27.209 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:38:27.219 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:38:27.222 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:38:27.223 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-04 16:38:27.223 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=message class=ResponseOutputMessage
+2026-10-04 16:38:27.223 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:38:27.224 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:27.225 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Invoking tool view_request
+2026-10-04 16:38:27.257 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tool view_request completed.
+2026-10-04 16:38:27.258 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 19 complete, next_step type=NextStepRunAgain
+2026-10-04 16:38:27.303 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 20, current_agent=Recon & Mapping Agent
+2026-10-04 16:38:27.303 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:27.305 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:38:27.305 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:27.309 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:38:36.286 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791112113-JaCUvWhO4vVjDJubpoac response_id=gen-1791112113-JaCUvWhO4vVjDJubpoac stream=1 duration_ms=8971 ttft_ms=7511 req_bytes=260359 res_bytes=726 finish=tool_calls in=61326 out=227 cached=61120 cost=0.017178 agent=eae88d0a attempt=0
+2026-10-04 16:38:36.323 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:38:36.333 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:38:36.336 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:38:36.337 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-04 16:38:36.337 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=message class=ResponseOutputMessage
+2026-10-04 16:38:36.337 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:38:36.338 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:36.339 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Invoking tool view_request
+2026-10-04 16:38:36.370 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tool view_request completed.
+2026-10-04 16:38:36.372 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 20 complete, next_step type=NextStepRunAgain
+2026-10-04 16:38:36.424 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 21, current_agent=Recon & Mapping Agent
+2026-10-04 16:38:36.424 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:36.433 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:38:36.434 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:36.438 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:38:45.121 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791112118-CH4ZCQ0LH2Puv22eGUJL response_id=gen-1791112118-CH4ZCQ0LH2Puv22eGUJL stream=1 duration_ms=8676 ttft_ms=3528 req_bytes=262684 res_bytes=682 finish=tool_calls in=62073 out=871 cached=61184 cost=0.020985 agent=eae88d0a attempt=0
+2026-10-04 16:38:45.171 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:38:45.186 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:38:45.195 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:38:45.197 INFO    cloudmate-onrender-com_c47b - strix.core.execution: sub-agent eae88d0a stopped at the budget reserve: Sub-agent budget reserve reached: spent $0.4620 of $0.50 (>= 90% reserve); stopping this sub-agent so the root agent can finish the scan.
+2026-10-04 16:38:45.197 INFO    cloudmate-onrender-com_c47b - strix.core.agents: agent.status eae88d0a=stopped
+2026-10-04 16:38:45.206 INFO    cloudmate-onrender-com_c47b - strix.core.execution: child eae88d0a stopped at the sub-agent budget reserve
+2026-10-04 16:38:45.271 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tool wait_for_agents completed.
+2026-10-04 16:38:45.278 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 3 complete, next_step type=NextStepRunAgain
+2026-10-04 16:38:45.369 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 4, current_agent=Root Agent
+2026-10-04 16:38:45.370 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:45.372 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:38:45.373 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:45.382 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:38:48.127 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791112127-oBuRioqQJYQRMLbrzkEm response_id=gen-1791112127-oBuRioqQJYQRMLbrzkEm stream=1 duration_ms=2736 ttft_ms=2697 req_bytes=241767 res_bytes=881 finish=tool_calls in=55817 out=184 cached=55360 cost=0.012055 agent=4d2188aa attempt=0
+2026-10-04 16:38:48.203 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:38:48.212 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:38:48.219 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:38:48.219 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-04 16:38:48.219 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=message class=ResponseOutputMessage
+2026-10-04 16:38:48.220 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:38:48.220 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:38:48.220 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:48.220 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:48.221 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Invoking tool view_agent_graph
+2026-10-04 16:38:48.221 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tool view_agent_graph completed.
+2026-10-04 16:38:48.221 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Invoking tool list_reports
+2026-10-04 16:38:48.222 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tool list_reports completed.
+2026-10-04 16:38:48.223 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 4 complete, next_step type=NextStepRunAgain
+2026-10-04 16:38:48.268 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Starting turn 5, current_agent=Root Agent
+2026-10-04 16:38:48.269 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:48.270 DEBUG   cloudmate-onrender-com_c47b - openai.agents: No conversation_id available for request
+2026-10-04 16:38:48.271 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:48.279 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Calling LLM
+2026-10-04 16:38:54.904 DEBUG   cloudmate-onrender-com_c47b - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1791112129-df28W9PnecfNMdA0z8Rp response_id=gen-1791112129-df28W9PnecfNMdA0z8Rp stream=1 duration_ms=6616 ttft_ms=1955 req_bytes=242869 res_bytes=737 finish=tool_calls in=56021 out=956 cached=55680 cost=0.014867 agent=4d2188aa attempt=0
+2026-10-04 16:38:54.952 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:38:54.963 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:38:54.968 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:38:54.968 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-04 16:38:54.969 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=message class=ResponseOutputMessage
+2026-10-04 16:38:54.969 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-04 16:38:54.969 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tracing is disabled. Not creating span
+2026-10-04 16:38:54.970 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Invoking tool finish_scan
+2026-10-04 16:38:54.970 INFO    cloudmate-onrender-com_c47b - strix.report.state: Updated scan final fields
+2026-10-04 16:38:55.020 INFO    cloudmate-onrender-com_c47b - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\coverage.json (0 surface(s), 1 gap(s))
+2026-10-04 16:38:55.021 INFO    cloudmate-onrender-com_c47b - strix.report.writer: Saved final penetration test report to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\penetration_test_report.md
+2026-10-04 16:38:55.032 INFO    cloudmate-onrender-com_c47b - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b\findings.sarif (0 results)
+2026-10-04 16:38:55.035 INFO    cloudmate-onrender-com_c47b - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\cloudmate-onrender-com_c47b
+2026-10-04 16:38:55.037 DEBUG   cloudmate-onrender-com_c47b - strix.telemetry.posthog: posthog disabled; skipping event scan_ended
+2026-10-04 16:38:55.042 DEBUG   cloudmate-onrender-com_c47b - strix.telemetry.scarf: scarf disabled; skipping event scan_ended
+2026-10-04 16:38:55.043 INFO    cloudmate-onrender-com_c47b - strix.tools.finish.tool: finish_scan: completed scan with 0 vulnerability report(s)
+2026-10-04 16:38:55.044 INFO    cloudmate-onrender-com_c47b - strix.core.agents: agent.status 4d2188aa=completed
+2026-10-04 16:38:55.050 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Tool finish_scan completed.
+2026-10-04 16:38:55.051 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Turn 5 complete, next_step type=NextStepFinalOutput
+2026-10-04 16:38:55.083 DEBUG   cloudmate-onrender-com_c47b - openai.agents: Resetting current trace
+2026-10-04 16:38:55.086 INFO    cloudmate-onrender-com_c47b - strix.core.runner: Tearing down sandbox session for scan cloudmate-onrender-com_c47b
+2026-10-04 16:38:55.866 INFO    cloudmate-onrender-com_c47b - strix.runtime.session_manager: Cleaned up sandbox session for scan cloudmate-onrender-com_c47b
+2026-10-04 16:38:55.867 INFO    cloudmate-onrender-com_c47b - strix.core.runner: iqAudi360 scan cloudmate-onrender-com_c47b done

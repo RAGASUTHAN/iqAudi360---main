@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Audit Logs — iqAudi360{% endblock %}
+{% block page_heading %}Security & Compliance Audit Logs{% endblock %}
+
+{% block content %}
+<div style="display: flex; flex-direction: column; gap: 24px;">
+  <div class="card" style="padding: 24px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <div>
+        <h3 style="font-size: 18px; font-weight: 700; color: #fff;">Audit Trail</h3>
+        <p style="font-size: 13px; color: var(--text-muted); margin-top: 2px;">Immutable record of authentication, permission changes, scans, and report downloads</p>
+      </div>
+      <button class="btn btn-secondary btn-sm" onclick="loadAuditLogs()">Refresh Logs</button>
+    </div>
+
+    <div class="table-container" style="overflow-x: auto;">
+      <table class="data-table" style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr style="text-align: left; border-bottom: 1px solid var(--border-subtle); color: var(--text-dim); font-size: 12px; text-transform: uppercase;">
+            <th style="padding: 12px 16px;">Timestamp (UTC)</th>
+            <th style="padding: 12px 16px;">Actor</th>
+            <th style="padding: 12px 16px;">Action</th>
+            <th style="padding: 12px 16px;">Resource</th>
+            <th style="padding: 12px 16px;">Tenant</th>
+            <th style="padding: 12px 16px;">Result</th>
+            <th style="padding: 12px 16px;">Details</th>
+          </tr>
+        </thead>
+        <tbody id="auditTableBody">
+          <tr>
+            <td colspan="7" style="text-align: center; padding: 24px; color: var(--text-muted);">Loading audit logs...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  async function loadAuditLogs() {
+    try {
+      const res = await fetch("/api/audit-logs");
+      const data = await res.json();
+      const tbody = document.getElementById("auditTableBody");
+
+      if (!res.ok || !data.logs) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--sev-critical); padding:20px;">Failed to load audit logs: ${data.message || 'Access denied'}</td></tr>`;
+        return;
+      }
+
+      if (data.logs.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--text-muted); padding:24px;">No audit events recorded yet.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = data.logs.map(l => {
+        const isSuccess = l.result === 'success';
+        return `
+          <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <td style="padding: 12px 16px; color: var(--text-muted); font-size: 12px; white-space: nowrap;">${l.timestamp ? l.timestamp.replace('T', ' ').split('.')[0] : 'N/A'}</td>
+            <td style="padding: 12px 16px; font-weight:600; color:#fff;">${l.actor_email || l.actor_user_id || 'System'}</td>
+            <td style="padding: 12px 16px;">
+              <span class="badge" style="background:rgba(0,210,255,0.1); color:#00d2ff; border:1px solid rgba(0,210,255,0.25); font-family:var(--font-mono); font-size:11px;">${l.action}</span>
+            </td>
+            <td style="padding: 12px 16px; color:#cbd5e1; font-family:var(--font-mono); font-size:12px;">${l.resource_type ? `${l.resource_type}: ${l.resource_id || ''}` : '-'}</td>
+            <td style="padding: 12px 16px; color:var(--text-muted); font-family:var(--font-mono); font-size:11px;">${l.tenant_id || 'Platform'}</td>
+            <td style="padding: 12px 16px;">
+              <span class="badge" style="background:${isSuccess ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)'}; color:${isSuccess ? '#10b981' : '#ef4444'}; border:1px solid ${isSuccess ? 'rgba(16,185,129,0.3)' : 'rgba(239,68,68,0.3)'};">
+                ${l.result.toUpperCase()}
+              </span>
+            </td>
+            <td style="padding: 12px 16px; color:var(--text-muted); font-size:12px; max-width:240px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${l.details || ''}">${l.details || '-'}</td>
+          </tr>
+        `;
+      }).join("");
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", loadAuditLogs);
+</script>
+{% endblock %}

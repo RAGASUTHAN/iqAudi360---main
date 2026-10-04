@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-04 11:08:57 UTC",
+  "run_id": "cloudmate-onrender-com_c47b",
+  "run_name": "cloudmate-onrender-com_c47b",
+  "scope": {
+    "targets": [
+      {
+        "type": "web_application",
+        "details": {
+          "target_url": "https://cloudmate.onrender.com/"
+        },
+        "original": "https://cloudmate.onrender.com/"
+      }
+    ],
+    "scan_mode": "quick",
+    "scope_mode": "auto",
+    "diff_scope": {
+      "active": false,
+      "mode": "auto"
+    },
+    "instruction": ""
+  },
+  "summary": {
+    "surfaces_reviewed": 0,
+    "outcomes": {},
+    "findings_filed": 0,
+    "gaps": 1
+  },
+  "machine_observed": {
+    "agents": [
+      {
+        "agent_id": "eae88d0a",
+        "agent_name": "Recon & Mapping Agent",
+        "status": "stopped",
+        "skills": [
+          "reconnaissance/asset_discovery",
+          "tooling/katana",
+          "tooling/ffuf",
+          "tooling/httpx"
+        ],
+        "task": "Perform reconnaissance and attack-surface mapping against the single in-scope black-box target: https://cloudmate.onrender.com/\n\nThis is an authorized security validation scan. Do NOT test for vulnerabilities yet — only map and enumerate. Your job:\n\n1. Technology fingerprinting: server headers, framework, language, JS libraries, versions (use httpx, whatweb-style probing via curl, wappalyzer-style hints).\n2. Full content discovery: crawl the site with katana/gospider (bounded: depth 3, 5-10 min max), plus ffuf/dirsearch directory bruteforce against common wordlists (keep it time-boxed, ~5 min). Note: \"cloudmate\" suggests cloud cost/management tooling — look for dashboards, login pages, API endpoints, docs (swagger/openapi), admin paths.\n3. Map ALL endpoints, parameters, forms, inputs — authenticated AND unauthenticated views. If there's a login/registration, register a test account if freely possible and crawl the authenticated surface; record how sessions work (cookies, JWTs, headers).\n4. Analyze JS files: extract API routes, hidden endpoints, embedded keys/tokens, endpoints referenced in the frontend.\n5. Record everything in shared notes via create_note: endpoint inventory, tech stack, auth model, roles/tenants visible, interesting parameters.\n6. Record coverage entries via record_coverage for surfaces you mapped (recon-level, e.g. no_issue_found for \"mapping only\" is fine — or leave coverage for testing agents; at minimum note what you mapped).\n\nUse the proxy tools (list_requests / view_request) for anything captured. Keep output bounded; clean up raw scan output files after extracting endpoint lists.\n\nReport back via agent_finish with: tech stack, endpoint inventory (organized), auth/session model, parameter map, and anything anomalous worth deeper testing (endpoints that look juicy for IDOR/SSRF/injection, debug routes, etc.).",
+        "is_root": false
+      },
+      {
+        "agent_id": "4d2188aa",
+        "agent_name": "Root Agent",
+        "status": "completed",
+        "skills": [],
+        "task": "\n\nURLs: - https://cloudmate.onrender.com/",
+        "is_root": true
+      }
+    ],
+    "skills_exercised": [
+      "asset_discovery",
+      "ffuf",
+      "httpx",
+      "katana"
+    ],
+    "findings_filed": 0,
+    "source": "runtime"
+  },
+  "completeness": {
+    "complete": false,
+    "scan_status": "completed",
+    "exit_reason": "finished_by_tool",
+    "caveats": [
+      "1 agent(s) did not finish cleanly (Recon & Mapping Agent); any surface they held is under-covered."
+    ]
+  },
+  "entries": [],
+  "gaps": [
+    {
+      "kind": "agent_recorded_no_coverage",
+      "agent_name": "Recon & Mapping Agent",
+      "detail": "Recon & Mapping Agent ran (status: stopped) without recording any coverage. Whatever it examined is absent from this record."
+    }
+  ]
+}

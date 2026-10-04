@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+
+{% block title %}New Scan — iqAudi360 Security Platform{% endblock %}
+{% block page_heading %}Configure Security Scan{% endblock %}
+
+{% block content %}
+<div style="max-width: 860px; margin: 0 auto;">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        New Multi-Agent Security Assessment
+      </div>
+      <span style="font-size: 11px; color: #64748b; font-family: var(--font-mono);">iqaudi360 headless runner</span>
+    </div>
+
+    <form id="newScanForm">
+      <!-- Target Input -->
+      <div class="form-group">
+        <label class="form-label" for="target">
+          Target Specification <span style="color: #ef4444;">*</span>
+        </label>
+        <input 
+          type="text" 
+          id="target" 
+          name="target" 
+          class="form-control" 
+          placeholder="e.g. https://example.com, ./my-project, api.example.com, 192.168.1.10, or ./openapi.yaml" 
+          required 
+          autocomplete="off"
+          style="font-size: 15px; font-weight: 500;"
+        >
+        <div class="form-hint">
+          Supported target types: Web URL, Git repository, local code directory, domain name, IP address, OpenAPI/Swagger YAML/JSON, or Postman collection.
+        </div>
+      </div>
+
+      <!-- Scan Mode Cards -->
+      <div class="form-group">
+        <label class="form-label">Scan Depth Mode</label>
+        <div class="mode-cards-grid">
+          <label class="mode-card" onclick="selectMode(this)">
+            <input type="radio" name="scan_mode" value="quick">
+            <div class="mode-title">
+              Quick
+              <span style="font-size: 11px; color: #06b6d4;">Fast</span>
+            </div>
+            <div class="mode-desc">High-speed surface mapping and critical checks. Best for rapid dev loops and CI/CD pipelines.</div>
+          </label>
+
+          <label class="mode-card" onclick="selectMode(this)">
+            <input type="radio" name="scan_mode" value="standard">
+            <div class="mode-title">
+              Standard
+              <span style="font-size: 11px; color: #3b82f6;">Balanced</span>
+            </div>
+            <div class="mode-desc">Balanced security review covering common OWASP vulnerabilities and service endpoints.</div>
+          </label>
+
+          <label class="mode-card selected" onclick="selectMode(this)">
+            <input type="radio" name="scan_mode" value="deep" checked>
+            <div class="mode-title">
+              Deep
+              <span style="font-size: 11px; color: #a855f7;">Recommended</span>
+            </div>
+            <div class="mode-desc">Comprehensive autonomous multi-agent pentest with full surface exploration and proof-of-concept validation.</div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Scope Mode -->
+      <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div>
+          <label class="form-label" for="scope_mode">Scope Mode</label>
+          <select id="scope_mode" name="scope_mode" class="form-control">
+            <option value="auto" selected>Auto — Diff in CI/headless, Full otherwise</option>
+            <option value="diff">Diff — Changed files and PR diffs only</option>
+            <option value="full">Full — Entire codebase and all reachable surfaces</option>
+          </select>
+          <div class="form-hint">Relevant for repository and local code analysis.</div>
+        </div>
+
+        <div>
+          <label class="form-label" for="max_budget">Max LLM Budget (USD)</label>
+          <input type="number" id="max_budget" name="max_budget" class="form-control" placeholder="Unlimited or e.g. 10.0" step="0.5" min="0.5">
+          <div class="form-hint">Optional spending ceiling for API model calls.</div>
+        </div>
+      </div>
+
+      <!-- Custom Instructions -->
+      <div class="form-group">
+        <label class="form-label" for="instruction">Custom Scan Instructions (Optional)</label>
+        <textarea 
+          id="instruction" 
+          name="instruction" 
+          class="form-control" 
+          rows="3" 
+          placeholder="e.g. Focus on authentication, IDOR, and API token leakage. Test user accounts: admin:pass, demo:pass."
+        ></textarea>
+        <div class="form-hint">Direct instructions passed to the root reasoning and attack agents.</div>
+      </div>
+
+      <!-- Advanced Settings Accordion -->
+      <details style="margin-bottom: 24px; background: rgba(0,0,0,0.25); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 14px 18px;">
+        <summary style="cursor: pointer; font-weight: 600; color: #94a3b8; font-size: 13px;">
+          ⚙️ Advanced CLI & Agent Parameters
+        </summary>
+        
+        <div style="margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div>
+            <label class="form-label" for="max_turns">Max Turns per Agent</label>
+            <input type="number" id="max_turns" name="max_turns" class="form-control" placeholder="500" value="500">
+          </div>
+          <div>
+            <label class="form-label" for="diff_base">Diff Base Branch / Commit</label>
+            <input type="text" id="diff_base" name="diff_base" class="form-control" placeholder="origin/main">
+          </div>
+          <div>
+            <label class="form-label" for="instruction_file">Instruction File Path</label>
+            <input type="text" id="instruction_file" name="instruction_file" class="form-control" placeholder="./instructions.md">
+          </div>
+          <div>
+            <label class="form-label" for="workspace_file">Workspace File (host:sandbox)</label>
+            <input type="text" id="workspace_file" name="workspace_file" class="form-control" placeholder="./wordlist.txt:lists/wordlist.txt">
+          </div>
+          <div>
+            <label class="form-label" for="config">Custom Config File (JSON)</label>
+            <input type="text" id="config" name="config" class="form-control" placeholder="~/.iqaudi360/cli-config.json">
+          </div>
+          <div>
+            <label class="form-label" for="mcp_config">MCP Server Config Path</label>
+            <input type="text" id="mcp_config" name="mcp_config" class="form-control" placeholder="~/.iqaudi360/mcp-servers.json">
+          </div>
+        </div>
+      </details>
+
+      <!-- Authorization Compliance Notice -->
+      <div style="background: rgba(234, 179, 8, 0.08); border: 1px solid rgba(234, 179, 8, 0.25); border-radius: var(--radius-sm); padding: 14px 18px; margin-bottom: 24px;">
+        <label style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer;">
+          <input type="checkbox" id="authorized" name="authorized" required style="margin-top: 3px; width: 16px; height: 16px; accent-color: var(--accent-cyan);">
+          <span style="font-size: 13px; color: #fef08a; line-height: 1.4;">
+            <strong>Mandatory Authorization Notice:</strong> I certify that I own this target system or possess explicit, written permission to conduct penetration testing and security assessment against it.
+          </span>
+        </label>
+      </div>
+
+      <!-- Action Buttons -->
+      <div style="display: flex; justify-content: flex-end; gap: 14px;">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Cancel</a>
+        <button type="submit" id="startScanBtn" class="btn btn-primary btn-lg">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          START SECURITY SCAN
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  function selectMode(cardEl) {
+    document.querySelectorAll(".mode-card").forEach(c => c.classList.remove("selected"));
+    cardEl.classList.add("selected");
+    const radio = cardEl.querySelector('input[type="radio"]');
+    if (radio) radio.checked = true;
+  }
+
+  document.getElementById("newScanForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById("startScanBtn");
+    btn.disabled = true;
+    btn.innerHTML = `
+      <span class="status-dot-pulse" style="background: #000; box-shadow: 0 0 8px #000; margin-right: 6px;"></span>
+      Initializing Agents...
+    `;
+
+    const form = e.target;
+    const formData = new FormData(form);
+    const payload = {};
+    formData.forEach((val, key) => {
+      payload[key] = val;
+    });
+
+    try {
+      const resp = await fetch("/api/scans/start", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await resp.json();
+      if (result.ok && result.redirect_url) {
+        showToast("Scan initiated! Redirecting to live monitor...", "success");
+        window.location.href = result.redirect_url;
+      } else {
+        showToast(result.error || "Failed to start scan.", "error");
+        btn.disabled = false;
+        btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg> START SECURITY SCAN`;
+      }
+    } catch (err) {
+      showToast("Network error: " + err, "error");
+      btn.disabled = false;
+      btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg> START SECURITY SCAN`;
+    }
+  });
+</script>
+{% endblock %}

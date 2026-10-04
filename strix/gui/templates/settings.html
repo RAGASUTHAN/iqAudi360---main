@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Settings & Diagnostics — iqAudi360{% endblock %}
+{% block page_heading %}Environment & System Diagnostics{% endblock %}
+
+{% block content %}
+<div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px;">
+  <!-- System Status Card -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Environment Overview
+      </div>
+      <span class="badge badge-status completed">SYSTEM READY</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 13px;">
+      <div style="background: rgba(0,0,0,0.3); padding: 14px; border-radius: var(--radius-sm);">
+        <div style="color: #64748b; font-size: 11px; text-transform: uppercase;">iqAudi360 Version</div>
+        <div style="color: #fff; font-weight: 700; font-size: 16px; margin-top: 2px;">{{ info.version }}</div>
+      </div>
+
+      <div style="background: rgba(0,0,0,0.3); padding: 14px; border-radius: var(--radius-sm);">
+        <div style="color: #64748b; font-size: 11px; text-transform: uppercase;">Python Runtime</div>
+        <div style="color: #fff; font-weight: 700; font-size: 16px; margin-top: 2px;">{{ info.python_version }} ({{ info.platform }})</div>
+      </div>
+
+      <div style="background: rgba(0,0,0,0.3); padding: 14px; border-radius: var(--radius-sm);">
+        <div style="color: #64748b; font-size: 11px; text-transform: uppercase;">Docker Engine</div>
+        <div style="color: {% if info.docker_available %}#34d399{% else %}#f87171{% endif %}; font-weight: 700; font-size: 14px; margin-top: 2px;">
+          {% if info.docker_available %}Online — {{ info.docker_version }}{% else %}Not Connected ({{ info.docker_version }}){% endif %}
+        </div>
+      </div>
+
+      <div style="background: rgba(0,0,0,0.3); padding: 14px; border-radius: var(--radius-sm);">
+        <div style="color: #64748b; font-size: 11px; text-transform: uppercase;">Default Timeout</div>
+        <div style="color: #fff; font-weight: 700; font-size: 16px; margin-top: 2px;">{{ info.default_timeout }}s</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LLM Configuration Card -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 2a10 10 0 0 1 10 10h-10V2z"/></svg>
+        Language Model Configuration
+      </div>
+      <span style="font-size: 11px; color: #64748b;">Server-Side Managed</span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 14px; font-size: 13px;">
+      <div>
+        <span style="color: #64748b;">Configured Model:</span>
+        <div style="color: #00d2ff; font-weight: 700; font-family: var(--font-mono); margin-top: 2px; font-size: 14px;">
+          {{ info.llm_model }}
+        </div>
+      </div>
+
+      <div>
+        <span style="color: #64748b;">API Base Routing:</span>
+        <div style="color: #fff; font-family: var(--font-mono); margin-top: 2px;">
+          {{ info.api_base }}
+        </div>
+      </div>
+
+      <div>
+        <span style="color: #64748b;">Sandbox Image:</span>
+        <div style="color: #fff; font-family: var(--font-mono); margin-top: 2px;">
+          {{ info.sandbox_image }}
+        </div>
+      </div>
+
+      <div>
+        <span style="color: #64748b;">Scan Artifacts Directory:</span>
+        <div style="color: #94a3b8; font-family: var(--font-mono); margin-top: 2px; font-size: 12px; word-break: break-all;">
+          {{ info.runs_directory }}
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px; padding: 14px; background: rgba(0, 210, 255, 0.05); border: 1px solid rgba(0, 210, 255, 0.2); border-radius: var(--radius-sm); font-size: 12px; color: #94a3b8;">
+      🔒 <strong>Security Policy:</strong> API keys, authorization tokens, and credentials are kept strictly server-side and never exposed to the frontend or browser. Configure models using <code>export IQAUDI360_LLM="..."</code>, <code>export LLM_API_KEY="..."</code>, or <code>iqaudi360 auth</code>.
+    </div>
+  </div>
+</div>
+{% endblock %}

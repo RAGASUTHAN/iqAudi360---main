@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-01 15:17:58 UTC",
+  "run_id": "petcare-udee-onrender-com_4199",
+  "run_name": "petcare-udee-onrender-com_4199",
+  "scope": {
+    "targets": [
+      {
+        "type": "web_application",
+        "details": {
+          "target_url": "https://petcare-udee.onrender.com"
+        },
+        "original": "https://petcare-udee.onrender.com"
+      }
+    ],
+    "scan_mode": "quick",
+    "scope_mode": "auto",
+    "diff_scope": {
+      "active": false,
+      "mode": "auto"
+    },
+    "instruction": ""
+  },
+  "summary": {
+    "surfaces_reviewed": 0,
+    "outcomes": {},
+    "findings_filed": 0,
+    "gaps": 3
+  },
+  "machine_observed": {
+    "agents": [
+      {
+        "agent_id": "a4573e87",
+        "agent_name": "Recon & Mapping Agent",
+        "status": "stopped",
+        "skills": [
+          "reconnaissance/asset_discovery",
+          "tooling/katana",
+          "tooling/ffuf",
+          "tooling/httpx"
+        ],
+        "task": "Perform comprehensive reconnaissance and attack-surface mapping of the in-scope black-box target: https://petcare-udee.onrender.com (ONLY this host — never test other domains/IPs).\n\nDeliverables:\n1. Technology fingerprinting: frameworks, server, languages, JS libraries, versions (headers, cookies, HTML source, /robots.txt, sitemap.xml, common files).\n2. Full endpoint inventory: crawl all pages (unauthenticated first; if login/registration is available, register a test account and crawl authenticated surfaces too). Use katana/gospider with bounded depth, plus a bounded ffuf/dirsearch pass for hidden paths (common wordlists, limited threads, stop on errors). Analyze all JS files for API endpoints, hidden routes, hardcoded secrets/API keys.\n3. Map authentication & session model: login/register/logout endpoints, cookie/token type, session cookie names, any JWT usage, roles visible in UI.\n4. Inventory all parameters, forms, and API endpoints with methods, and note which require auth and which don't.\n5. Save a durable summary note (create_note, category \"wiki\" or \"general\") with: tech stack, endpoint list (method + path + auth required Y/N + parameters), session model, and any interesting observations. Also call save_threat_model on https://petcare-udee.onrender.com with a black-box derived threat model (mark inferred vs observed).\n6. Record coverage entries (record_coverage) for surfaces you mapped.\n\nConstraints: keep scans bounded (no aggressive directory brute forcing beyond common wordlists; throttle), do not run exploitation payloads yet — this phase is mapping only. Do not use identifiable markers in requests. Clean up large raw output files from /workspace once endpoint lists are extracted.\n\nWhen done, call agent_finish with a concise completion summary.",
+        "is_root": false
+      },
+      {
+        "agent_id": "369052e2",
+        "agent_name": "Recon & Mapping Agent — Auth Flows",
+        "status": "stopped",
+        "skills": [
+          "tooling/agent_browser",
+          "vulnerabilities/authentication_jwt"
+        ],
+        "task": "You are a second recon agent working in parallel with a primary mapping agent on the in-scope black-box target: https://petcare-udee.onrender.com (ONLY this host — never test other domains/IPs).\n\nYour EXCLUSIVE focus: the authentication, registration, and user-account surface. Do NOT do general crawling or directory bruteforcing (the primary recon agent covers that).\n\nDeliverables:\n1. Map the full auth flows: register, login, logout, password reset, profile/account management, session handling. Use the agent-browser CLI (via exec_command, always with `--session authrecon`) to drive the UI — register a fresh test account, log in, log out, inspect cookies and tokens in the browser and via Caido proxy captures (list_requests/view_request).\n2. Characterize the session model precisely: cookie names, attributes (HttpOnly/Secure/SameSite), JWT tokens if any (decode header/payload, note signing algorithm, expiry, claims), where tokens are stored (cookie vs localStorage), how requests authenticate (header vs cookie).\n3. Note any visible roles/admin surfaces, user enumeration signals on login/register (distinguishable error messages, response timing), and password policy.\n4. Write findings to a shared note (create_note, category \"general\", tags [\"auth-recon\",\"endpoints\"]) so other agents build on it. Do not write a threat model (primary agent owns that).\n5. Record coverage entries (record_coverage) for the auth surfaces you assess.\n\nConstraints: mapping only — do NOT attempt exploitation (no auth bypass, no password brute force, no payload injection). Throttle requests. No identifiable markers in requests/usernames (use plausible generic names). Clean up raw output files.\n\nWhen done, call agent_finish with a concise completion summary.",
+        "is_root": false
+      },
+      {
+        "agent_id": "46fd129b",
+        "agent_name": "Root Agent",
+        "status": "completed",
+        "skills": [],
+        "task": "\n\nURLs: - https://petcare-udee.onrender.com",
+        "is_root": true
+      }
+    ],
+    "skills_exercised": [
+      "agent_browser",
+      "asset_discovery",
+      "authentication_jwt",
+      "ffuf",
+      "httpx",
+      "katana"
+    ],
+    "findings_filed": 0,
+    "source": "runtime"
+  },
+  "completeness": {
+    "complete": false,
+    "scan_status": "completed",
+    "exit_reason": "finished_by_tool",
+    "caveats": [
+      "2 agent(s) did not finish cleanly (Recon & Mapping Agent, Recon & Mapping Agent — Auth Flows); any surface they held is under-covered."
+    ]
+  },
+  "entries": [],
+  "gaps": [
+    {
+      "kind": "unrecorded_risk_class",
+      "risk_area": "authentication jwt",
+      "detail": "Agent(s) Recon & Mapping Agent — Auth Flows were assigned the 'authentication_jwt' skill, but no coverage entry records this class being assessed. Treat it as unexamined, not as clean."
+    },
+    {
+      "kind": "agent_recorded_no_coverage",
+      "agent_name": "Recon & Mapping Agent",
+      "detail": "Recon & Mapping Agent ran (status: stopped) without recording any coverage. Whatever it examined is absent from this record."
+    },
+    {
+      "kind": "agent_recorded_no_coverage",
+      "agent_name": "Recon & Mapping Agent — Auth Flows",
+      "detail": "Recon & Mapping Agent — Auth Flows ran (status: stopped) without recording any coverage. Whatever it examined is absent from this record."
+    }
+  ]
+}

@@ -1,0 +1,534 @@
+2026-10-01 20:45:49.900 INFO    petcare-udee-onrender-com_4199 - strix.core.runner: Starting iqAudi360 scan petcare-udee-onrender-com_4199 (image=ghcr.io/usestrix/strix-sandbox:1.3.0, max_turns=500, interactive=False, run_dir=C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199)
+2026-10-01 20:45:49.901 INFO    petcare-udee-onrender-com_4199 - strix.core.runner: LLM model resolved: openrouter/z-ai/glm-5.3
+2026-10-01 20:45:49.901 INFO    petcare-udee-onrender-com_4199 - strix.core.runner: Bringing up sandbox session for scan petcare-udee-onrender-com_4199
+2026-10-01 20:45:49.902 DEBUG   petcare-udee-onrender-com_4199 - strix.runtime.backends: Selected sandbox backend: docker
+2026-10-01 20:45:49.902 INFO    petcare-udee-onrender-com_4199 - strix.runtime.session_manager: Creating sandbox session for scan petcare-udee-onrender-com_4199 (backend=docker, image=ghcr.io/usestrix/strix-sandbox:1.3.0)
+2026-10-01 20:45:50.572 DEBUG   petcare-udee-onrender-com_4199 - strix.runtime.docker_client: Creating sandbox container: image=ghcr.io/usestrix/strix-sandbox:1.3.0 caps=['NET_ADMIN', 'NET_RAW'] exposed_ports=[48080]
+2026-10-01 20:45:51.406 INFO    petcare-udee-onrender-com_4199 - strix.runtime.docker_client: Sandbox container created: id=7da7dccc0c86 image=ghcr.io/usestrix/strix-sandbox:1.3.0
+2026-10-01 20:45:54.452 DEBUG   petcare-udee-onrender-com_4199 - strix.runtime.session_manager: Caido host endpoint resolved: http://127.0.0.1:53150
+2026-10-01 20:45:54.452 INFO    petcare-udee-onrender-com_4199 - strix.runtime.session_manager: Sandbox session for scan petcare-udee-onrender-com_4199 ready and cached
+2026-10-01 20:45:54.453 INFO    petcare-udee-onrender-com_4199 - strix.core.runner: Sandbox ready for scan petcare-udee-onrender-com_4199
+2026-10-01 20:45:54.467 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: Loaded skill: scan_modes/quick -> quick
+2026-10-01 20:45:54.469 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: Loaded skill: tooling/agent_browser -> agent_browser
+2026-10-01 20:45:54.471 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: Loaded skill: tooling/python -> python
+2026-10-01 20:45:54.479 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: Loaded skill: analysis/counterevidence -> counterevidence
+2026-10-01 20:45:54.484 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: Loaded skill: analysis/severity_calibration -> severity_calibration
+2026-10-01 20:45:54.487 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: Loaded skill: coordination/root_agent -> root_agent
+2026-10-01 20:45:54.488 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: load_skills: 6 skill(s) resolved
+2026-10-01 20:45:54.585 DEBUG   petcare-udee-onrender-com_4199 - strix.agents.prompt: render_system_prompt: scan_mode=quick root=True whitebox=False skills=6 prompt_len=103720
+2026-10-01 20:45:54.585 INFO    petcare-udee-onrender-com_4199 - strix.agents.factory: Built root agent 'Root Agent' (skills=0, tools=44, scan_mode=quick, whitebox=False)
+2026-10-01 20:45:54.586 INFO    petcare-udee-onrender-com_4199 - strix.core.agents: agent.register 46fd129b (Root Agent) parent=-
+2026-10-01 20:45:54.665 INFO    petcare-udee-onrender-com_4199 - strix.runtime.caido_bootstrap: Bootstrapping Caido client (host=http://127.0.0.1:53150, container=http://127.0.0.1:48080)
+2026-10-01 20:45:54.742 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating trace
+2026-10-01 20:45:54.748 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Setting current trace: no-op
+2026-10-01 20:45:54.748 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:45:54.790 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:45:54.791 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 1, current_agent=Root Agent
+2026-10-01 20:45:54.795 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:45:54.800 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:45:54.800 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:45:54.804 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:45:55.502 INFO    petcare-udee-onrender-com_4199 - strix.runtime.caido_bootstrap: Caido project selected: 997c34d7-2cad-4023-acac-76e6b2dc43fe
+2026-10-01 20:46:02.630 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867758-pfDwML3zwEOVJSlPpYau response_id=gen-1790867758-pfDwML3zwEOVJSlPpYau stream=1 duration_ms=7810 ttft_ms=7374 req_bytes=235865 res_bytes=855 finish=tool_calls in=54645 out=90 cached=24576 cost=0.045933 agent=46fd129b attempt=0
+2026-10-01 20:46:02.733 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 1 gap(s))
+2026-10-01 20:46:02.745 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:46:02.751 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:46:02.753 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-01 20:46:02.754 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=message class=ResponseOutputMessage
+2026-10-01 20:46:02.754 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:46:02.754 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:46:02.757 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:02.759 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:02.762 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Invoking tool get_threat_model
+2026-10-01 20:46:02.763 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Invoking tool list_notes
+2026-10-01 20:46:02.765 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tool list_notes completed.
+2026-10-01 20:46:02.765 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tool get_threat_model completed.
+2026-10-01 20:46:02.767 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 1 complete, next_step type=NextStepRunAgain
+2026-10-01 20:46:02.827 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 2, current_agent=Root Agent
+2026-10-01 20:46:02.828 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:02.833 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:46:02.834 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:02.837 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:46:09.992 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867766-bRSUVFwkUVCKbTPkCdUa response_id=gen-1790867766-bRSUVFwkUVCKbTPkCdUa stream=1 duration_ms=7133 ttft_ms=5430 req_bytes=237030 res_bytes=727 finish=tool_calls in=54846 out=488 cached=54528 cost=0.010226 agent=46fd129b attempt=0
+2026-10-01 20:46:10.106 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 1 gap(s))
+2026-10-01 20:46:10.119 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:46:10.129 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:46:10.132 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-01 20:46:10.132 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=message class=ResponseOutputMessage
+2026-10-01 20:46:10.132 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:46:10.135 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:10.136 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Invoking tool create_agent
+2026-10-01 20:46:10.173 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: Loaded skill: reconnaissance/asset_discovery -> asset_discovery
+2026-10-01 20:46:10.179 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: Loaded skill: tooling/katana -> katana
+2026-10-01 20:46:10.183 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: Loaded skill: tooling/ffuf -> ffuf
+2026-10-01 20:46:10.187 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: Loaded skill: tooling/httpx -> httpx
+2026-10-01 20:46:10.196 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: Loaded skill: scan_modes/quick -> quick
+2026-10-01 20:46:10.201 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: Loaded skill: tooling/agent_browser -> agent_browser
+2026-10-01 20:46:10.204 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: Loaded skill: tooling/python -> python
+2026-10-01 20:46:10.211 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: Loaded skill: analysis/counterevidence -> counterevidence
+2026-10-01 20:46:10.216 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: Loaded skill: analysis/severity_calibration -> severity_calibration
+2026-10-01 20:46:10.217 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: load_skills: 9 skill(s) resolved
+2026-10-01 20:46:10.363 DEBUG   petcare-udee-onrender-com_4199 - strix.agents.prompt: render_system_prompt: scan_mode=quick root=False whitebox=False skills=9 prompt_len=118897
+2026-10-01 20:46:10.364 INFO    petcare-udee-onrender-com_4199 - strix.agents.factory: Built child agent 'Recon & Mapping Agent' (skills=4, tools=44, scan_mode=quick, whitebox=False)
+2026-10-01 20:46:10.365 INFO    petcare-udee-onrender-com_4199 - strix.core.agents: agent.register a4573e87 (Recon & Mapping Agent) parent=46fd129b
+2026-10-01 20:46:10.388 INFO    petcare-udee-onrender-com_4199 - strix.tools.agents_graph.tools: create_agent: spawned a4573e87 (Recon & Mapping Agent) parent=46fd129b skills=4 task_len=1785
+2026-10-01 20:46:10.389 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tool create_agent completed.
+2026-10-01 20:46:10.395 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 2 complete, next_step type=NextStepRunAgain
+2026-10-01 20:46:10.500 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 3, current_agent=Root Agent
+2026-10-01 20:46:10.501 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:10.507 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:46:10.510 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:10.517 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:46:10.594 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:10.664 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:10.664 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 1, current_agent=Recon & Mapping Agent
+2026-10-01 20:46:10.665 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:10.668 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:46:10.668 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:10.672 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:46:16.432 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867772-QRs0IKyBvM5qPDKFjTbN response_id=gen-1790867772-QRs0IKyBvM5qPDKFjTbN stream=1 duration_ms=5888 ttft_ms=4329 req_bytes=239578 res_bytes=683 finish=tool_calls in=55368 out=418 cached=54720 cost=0.010407 agent=46fd129b attempt=0
+2026-10-01 20:46:16.708 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 1 gap(s))
+2026-10-01 20:46:16.719 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:46:16.731 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:46:16.733 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:46:16.736 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:16.737 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Invoking tool create_agent
+2026-10-01 20:46:16.772 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: Loaded skill: tooling/agent_browser -> agent_browser
+2026-10-01 20:46:16.777 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: Loaded skill: vulnerabilities/authentication_jwt -> authentication_jwt
+2026-10-01 20:46:16.782 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: Loaded skill: scan_modes/quick -> quick
+2026-10-01 20:46:16.786 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: Loaded skill: tooling/python -> python
+2026-10-01 20:46:16.791 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: Loaded skill: analysis/counterevidence -> counterevidence
+2026-10-01 20:46:16.796 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: Loaded skill: analysis/severity_calibration -> severity_calibration
+2026-10-01 20:46:16.798 DEBUG   petcare-udee-onrender-com_4199 - strix.skills: load_skills: 6 skill(s) resolved
+2026-10-01 20:46:16.931 DEBUG   petcare-udee-onrender-com_4199 - strix.agents.prompt: render_system_prompt: scan_mode=quick root=False whitebox=False skills=6 prompt_len=104561
+2026-10-01 20:46:16.932 INFO    petcare-udee-onrender-com_4199 - strix.agents.factory: Built child agent 'Recon & Mapping Agent — Auth Flows' (skills=2, tools=44, scan_mode=quick, whitebox=False)
+2026-10-01 20:46:16.933 INFO    petcare-udee-onrender-com_4199 - strix.core.agents: agent.register 369052e2 (Recon & Mapping Agent — Auth Flows) parent=46fd129b
+2026-10-01 20:46:16.953 INFO    petcare-udee-onrender-com_4199 - strix.tools.agents_graph.tools: create_agent: spawned 369052e2 (Recon & Mapping Agent — Auth Flows) parent=46fd129b skills=2 task_len=1755
+2026-10-01 20:46:16.953 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tool create_agent completed.
+2026-10-01 20:46:16.958 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 3 complete, next_step type=NextStepRunAgain
+2026-10-01 20:46:17.049 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 4, current_agent=Root Agent
+2026-10-01 20:46:17.050 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:17.060 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:46:17.062 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:17.070 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:46:17.157 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:17.234 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:17.235 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 1, current_agent=Recon & Mapping Agent — Auth Flows
+2026-10-01 20:46:17.235 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:17.241 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:46:17.241 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:17.246 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:46:30.537 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867787-OkGqtEN3HR7AwtgYvGVx response_id=gen-1790867787-OkGqtEN3HR7AwtgYvGVx stream=1 duration_ms=13444 ttft_ms=12410 req_bytes=242005 res_bytes=681 finish=tool_calls in=55861 out=266 cached=55680 cost=0.009219 agent=46fd129b attempt=0
+2026-10-01 20:46:30.778 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:46:30.791 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:46:30.799 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:46:30.812 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:46:30.825 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:30.833 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Invoking tool create_todo
+2026-10-01 20:46:30.867 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tool create_todo completed.
+2026-10-01 20:46:30.896 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867786-seJIdtIRakvYcySUNcqN response_id=gen-1790867786-seJIdtIRakvYcySUNcqN stream=1 duration_ms=20204 ttft_ms=19108 req_bytes=248162 res_bytes=721 finish=tool_calls in=58545 out=190 cached=0 cost=0.082799 agent=a4573e87 attempt=0
+2026-10-01 20:46:31.016 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:46:31.033 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:46:31.045 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:46:31.047 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-01 20:46:31.047 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=message class=ResponseOutputMessage
+2026-10-01 20:46:31.048 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:46:31.050 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 4 complete, next_step type=NextStepRunAgain
+2026-10-01 20:46:31.060 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:31.196 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 5, current_agent=Root Agent
+2026-10-01 20:46:31.197 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:31.211 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:46:31.212 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:31.223 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:46:31.304 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 1 complete, next_step type=NextStepRunAgain
+2026-10-01 20:46:31.407 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 2, current_agent=Recon & Mapping Agent
+2026-10-01 20:46:31.407 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:31.411 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:46:31.411 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:31.415 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:46:38.339 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867795-3Ht87UV2GSlCUQ0jErAu response_id=gen-1790867795-3Ht87UV2GSlCUQ0jErAu stream=1 duration_ms=7093 ttft_ms=6987 req_bytes=246195 res_bytes=685 finish=tool_calls in=56918 out=70 cached=56000 cost=0.009433 agent=46fd129b attempt=0
+2026-10-01 20:46:38.461 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:46:38.474 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:46:38.482 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:46:38.484 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=message class=ResponseOutputMessage
+2026-10-01 20:46:38.487 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:46:38.490 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:38.491 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Invoking tool wait_for_agents
+2026-10-01 20:46:38.492 INFO    petcare-udee-onrender-com_4199 - strix.core.agents: agent.status 46fd129b=waiting
+2026-10-01 20:46:39.142 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867796-nASyJeOeWszhmzbUmhhe response_id=gen-1790867796-nASyJeOeWszhmzbUmhhe stream=1 duration_ms=7707 ttft_ms=7545 req_bytes=248915 res_bytes=681 finish=tool_calls in=58746 out=30 cached=31232 cost=0.012431 agent=a4573e87 attempt=0
+2026-10-01 20:46:39.304 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:46:39.315 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:46:39.326 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:46:39.328 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:46:39.331 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:39.580 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 2 complete, next_step type=NextStepRunAgain
+2026-10-01 20:46:39.649 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 3, current_agent=Recon & Mapping Agent
+2026-10-01 20:46:39.650 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:39.658 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:46:39.658 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:39.662 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:46:40.225 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867796-F9TELzNpw7tZSXfLMAf3 response_id=gen-1790867796-F9TELzNpw7tZSXfLMAf3 stream=1 duration_ms=22962 ttft_ms=22216 req_bytes=233591 res_bytes=853 finish=tool_calls in=54371 out=173 cached=31232 cost=0.012098 agent=369052e2 attempt=0
+2026-10-01 20:46:40.338 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:46:40.350 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:46:40.360 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:46:40.362 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-01 20:46:40.362 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=message class=ResponseOutputMessage
+2026-10-01 20:46:40.363 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:46:40.363 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:46:40.365 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:40.366 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:40.371 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Invoking tool list_requests
+2026-10-01 20:46:40.430 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tool list_requests completed.
+2026-10-01 20:46:40.591 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 1 complete, next_step type=NextStepRunAgain
+2026-10-01 20:46:40.666 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 2, current_agent=Recon & Mapping Agent — Auth Flows
+2026-10-01 20:46:40.667 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:40.677 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:46:40.678 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:40.685 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:46:44.395 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867802-0sp7Dv5POV7aua4u7zx8 response_id=gen-1790867802-0sp7Dv5POV7aua4u7zx8 stream=1 duration_ms=4716 ttft_ms=4176 req_bytes=249281 res_bytes=682 finish=tool_calls in=58809 out=99 cached=58752 cost=0.012199 agent=a4573e87 attempt=0
+2026-10-01 20:46:44.478 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:46:44.490 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:46:44.494 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:46:44.495 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:46:44.498 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:44.736 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 3 complete, next_step type=NextStepRunAgain
+2026-10-01 20:46:44.843 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 4, current_agent=Recon & Mapping Agent
+2026-10-01 20:46:44.844 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:44.852 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:46:44.852 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:44.858 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:46:46.148 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867804-Pej2xyx5vPh3hDYp68FX response_id=gen-1790867804-Pej2xyx5vPh3hDYp68FX stream=1 duration_ms=5401 ttft_ms=5287 req_bytes=235291 res_bytes=681 finish=tool_calls in=54862 out=30 cached=54336 cost=0.011115 agent=369052e2 attempt=0
+2026-10-01 20:46:46.443 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:46:46.457 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:46:46.462 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:46:46.464 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:46:46.470 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:46.706 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 2 complete, next_step type=NextStepRunAgain
+2026-10-01 20:46:46.760 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 3, current_agent=Recon & Mapping Agent — Auth Flows
+2026-10-01 20:46:46.761 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:46.764 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:46:46.765 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:46.772 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:46:48.262 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867806-7cd8D0t5VK2Q4rXIoJQS response_id=gen-1790867806-7cd8D0t5VK2Q4rXIoJQS stream=1 duration_ms=3383 ttft_ms=3266 req_bytes=249883 res_bytes=681 finish=tool_calls in=58944 out=30 cached=58880 cost=0.011922 agent=a4573e87 attempt=0
+2026-10-01 20:46:48.380 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:46:48.390 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:46:48.395 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:46:48.397 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:46:48.401 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:48.612 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 4 complete, next_step type=NextStepRunAgain
+2026-10-01 20:46:48.662 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 5, current_agent=Recon & Mapping Agent
+2026-10-01 20:46:48.662 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:48.665 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:46:48.668 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:48.671 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:46:49.084 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867807-3aWrHvriOCqrRsmhC1ca response_id=gen-1790867807-3aWrHvriOCqrRsmhC1ca stream=1 duration_ms=2288 ttft_ms=2186 req_bytes=235657 res_bytes=682 finish=tool_calls in=54921 out=32 cached=54848 cost=0.011126 agent=369052e2 attempt=0
+2026-10-01 20:46:49.260 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:46:49.273 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:46:49.277 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:46:49.279 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:46:49.280 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:49.511 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 3 complete, next_step type=NextStepRunAgain
+2026-10-01 20:46:49.612 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 4, current_agent=Recon & Mapping Agent — Auth Flows
+2026-10-01 20:46:49.612 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:49.618 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:46:49.619 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:49.623 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:46:52.797 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867810-ecccrRHRij0GPsSKc7Jh response_id=gen-1790867810-ecccrRHRij0GPsSKc7Jh stream=1 duration_ms=4106 ttft_ms=3706 req_bytes=250249 res_bytes=725 finish=tool_calls in=59006 out=59 cached=58944 cost=0.012062 agent=a4573e87 attempt=0
+2026-10-01 20:46:52.908 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:46:52.923 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:46:52.933 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:46:52.937 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-01 20:46:52.938 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:46:52.943 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:53.153 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 5 complete, next_step type=NextStepRunAgain
+2026-10-01 20:46:53.253 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 6, current_agent=Recon & Mapping Agent
+2026-10-01 20:46:53.254 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:53.257 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:46:53.258 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:53.262 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:46:54.173 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867812-c2Keb6HexesQpgTJ83DZ response_id=gen-1790867812-c2Keb6HexesQpgTJ83DZ stream=1 duration_ms=4523 ttft_ms=4422 req_bytes=236058 res_bytes=681 finish=tool_calls in=54990 out=30 cached=54912 cost=0.011132 agent=369052e2 attempt=0
+2026-10-01 20:46:54.294 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:46:54.324 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:46:54.342 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:46:54.343 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:46:54.345 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:54.560 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 4 complete, next_step type=NextStepRunAgain
+2026-10-01 20:46:54.607 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 5, current_agent=Recon & Mapping Agent — Auth Flows
+2026-10-01 20:46:54.608 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:54.611 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:46:54.612 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:54.618 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:46:58.278 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867816-LuxmYsz2IeWKh3ooszqu response_id=gen-1790867816-LuxmYsz2IeWKh3ooszqu stream=1 duration_ms=4996 ttft_ms=4590 req_bytes=250624 res_bytes=724 finish=tool_calls in=59065 out=54 cached=58944 cost=0.012053 agent=a4573e87 attempt=0
+2026-10-01 20:46:58.394 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:46:58.410 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:46:58.424 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:46:58.426 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-01 20:46:58.426 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:46:58.428 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:58.662 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 6 complete, next_step type=NextStepRunAgain
+2026-10-01 20:46:58.740 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 7, current_agent=Recon & Mapping Agent
+2026-10-01 20:46:58.741 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:58.747 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:46:58.749 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:58.759 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:46:59.235 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867817-KRXaEuDcDs6vqTvnhO5H response_id=gen-1790867817-KRXaEuDcDs6vqTvnhO5H stream=1 duration_ms=4594 ttft_ms=4297 req_bytes=236424 res_bytes=724 finish=tool_calls in=55051 out=73 cached=54976 cost=0.011333 agent=369052e2 attempt=0
+2026-10-01 20:46:59.344 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:46:59.358 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:46:59.368 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:46:59.371 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-01 20:46:59.371 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:46:59.374 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:59.640 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 5 complete, next_step type=NextStepRunAgain
+2026-10-01 20:46:59.711 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 6, current_agent=Recon & Mapping Agent — Auth Flows
+2026-10-01 20:46:59.712 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:59.730 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:46:59.737 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:46:59.755 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:47:05.672 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867823-Jou7S8JMFxta8LMNTb6P response_id=gen-1790867823-Jou7S8JMFxta8LMNTb6P stream=1 duration_ms=5892 ttft_ms=5492 req_bytes=236870 res_bytes=724 finish=tool_calls in=55137 out=86 cached=55040 cost=0.011408 agent=369052e2 attempt=0
+2026-10-01 20:47:05.788 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:47:05.800 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:47:05.807 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:47:05.808 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-01 20:47:05.809 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:47:05.811 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:06.059 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 6 complete, next_step type=NextStepRunAgain
+2026-10-01 20:47:06.127 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 7, current_agent=Recon & Mapping Agent — Auth Flows
+2026-10-01 20:47:06.128 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:06.137 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:47:06.138 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:06.144 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:47:08.508 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867822-2z8TmEUfDIwJGR7M9DEi response_id=gen-1790867822-2z8TmEUfDIwJGR7M9DEi stream=1 duration_ms=9727 ttft_ms=8081 req_bytes=250990 res_bytes=727 finish=tool_calls in=59127 out=142 cached=59008 cost=0.012453 agent=a4573e87 attempt=0
+2026-10-01 20:47:08.641 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:47:08.657 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:47:08.669 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:47:08.672 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-01 20:47:08.672 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=message class=ResponseOutputMessage
+2026-10-01 20:47:08.672 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:47:08.674 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:08.908 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 7 complete, next_step type=NextStepRunAgain
+2026-10-01 20:47:09.007 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 8, current_agent=Recon & Mapping Agent
+2026-10-01 20:47:09.007 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:09.010 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:47:09.011 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:09.019 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:47:09.964 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867827-Vf0OFTeW8bQIW788jTMh response_id=gen-1790867827-Vf0OFTeW8bQIW788jTMh stream=1 duration_ms=3795 ttft_ms=3273 req_bytes=237236 res_bytes=725 finish=tool_calls in=55199 out=123 cached=55104 cost=0.011583 agent=369052e2 attempt=0
+2026-10-01 20:47:10.084 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:47:10.104 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:47:10.110 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:47:10.118 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-01 20:47:10.118 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=message class=ResponseOutputMessage
+2026-10-01 20:47:10.119 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:47:10.121 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:10.342 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 7 complete, next_step type=NextStepRunAgain
+2026-10-01 20:47:10.438 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 8, current_agent=Recon & Mapping Agent — Auth Flows
+2026-10-01 20:47:10.439 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:10.442 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:47:10.442 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:10.449 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:47:11.884 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867830-W4lC3oQf40yGFqo5Qpx2 response_id=gen-1790867830-W4lC3oQf40yGFqo5Qpx2 stream=1 duration_ms=2849 ttft_ms=2781 req_bytes=251481 res_bytes=680 finish=tool_calls in=59212 out=30 cached=59072 cost=0.011977 agent=a4573e87 attempt=0
+2026-10-01 20:47:11.989 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:47:12.006 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:47:12.022 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:47:12.026 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:47:12.038 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:12.285 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 8 complete, next_step type=NextStepRunAgain
+2026-10-01 20:47:12.385 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 9, current_agent=Recon & Mapping Agent
+2026-10-01 20:47:12.386 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:12.391 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:47:12.392 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:12.400 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:47:13.337 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867831-SrnEJVHfoinMopi5Eq6t response_id=gen-1790867831-SrnEJVHfoinMopi5Eq6t stream=1 duration_ms=2869 ttft_ms=2802 req_bytes=237852 res_bytes=681 finish=tool_calls in=55314 out=30 cached=55168 cost=0.011198 agent=369052e2 attempt=0
+2026-10-01 20:47:13.457 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:47:13.471 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:47:13.483 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:47:13.486 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:47:13.489 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:13.726 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 8 complete, next_step type=NextStepRunAgain
+2026-10-01 20:47:13.787 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 9, current_agent=Recon & Mapping Agent — Auth Flows
+2026-10-01 20:47:13.788 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:13.792 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:47:13.793 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:13.801 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:47:15.395 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867833-KQlnNX7AGwN8OUAj1mBv response_id=gen-1790867833-KQlnNX7AGwN8OUAj1mBv stream=1 duration_ms=2973 ttft_ms=2585 req_bytes=251847 res_bytes=682 finish=tool_calls in=59277 out=47 cached=59200 cost=0.012064 agent=a4573e87 attempt=0
+2026-10-01 20:47:15.504 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:47:15.516 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:47:15.523 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:47:15.525 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:47:15.531 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:15.743 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 9 complete, next_step type=NextStepRunAgain
+2026-10-01 20:47:15.816 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 10, current_agent=Recon & Mapping Agent
+2026-10-01 20:47:15.817 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:15.821 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:47:15.823 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:15.826 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:47:16.627 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867834-HhVAp7oZcOs7TNEzAdnN response_id=gen-1790867834-HhVAp7oZcOs7TNEzAdnN stream=1 duration_ms=2808 ttft_ms=2316 req_bytes=238218 res_bytes=725 finish=tool_calls in=55376 out=125 cached=55296 cost=0.011627 agent=369052e2 attempt=0
+2026-10-01 20:47:16.824 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:47:16.834 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:47:16.838 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:47:16.839 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-01 20:47:16.840 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=message class=ResponseOutputMessage
+2026-10-01 20:47:16.840 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:47:16.841 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:16.990 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 9 complete, next_step type=NextStepRunAgain
+2026-10-01 20:47:17.052 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 10, current_agent=Recon & Mapping Agent — Auth Flows
+2026-10-01 20:47:17.053 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:17.058 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:47:17.059 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:17.068 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:47:19.234 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867837-8GzudZvkyj4u9mdBzD8E response_id=gen-1790867837-8GzudZvkyj4u9mdBzD8E stream=1 duration_ms=2130 ttft_ms=2037 req_bytes=238848 res_bytes=681 finish=tool_calls in=55499 out=30 cached=55360 cost=0.011235 agent=369052e2 attempt=0
+2026-10-01 20:47:19.340 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:47:19.352 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:47:19.358 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:47:19.367 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:47:19.370 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:19.667 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 10 complete, next_step type=NextStepRunAgain
+2026-10-01 20:47:19.751 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 11, current_agent=Recon & Mapping Agent — Auth Flows
+2026-10-01 20:47:19.751 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:19.755 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:47:19.756 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:19.760 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:47:20.512 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867836-TTlxwQCLtGWJis26I0uQ response_id=gen-1790867836-TTlxwQCLtGWJis26I0uQ stream=1 duration_ms=4661 ttft_ms=3253 req_bytes=252304 res_bytes=681 finish=tool_calls in=59360 out=30 cached=59264 cost=0.012006 agent=a4573e87 attempt=0
+2026-10-01 20:47:20.642 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:47:20.657 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:47:20.671 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:47:20.674 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:47:20.686 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:20.871 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 10 complete, next_step type=NextStepRunAgain
+2026-10-01 20:47:20.942 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 11, current_agent=Recon & Mapping Agent
+2026-10-01 20:47:20.943 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:20.953 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:47:20.954 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:20.958 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:47:23.913 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867840-wvyQtLSI8pxM5IhL4Ttr response_id=gen-1790867840-wvyQtLSI8pxM5IhL4Ttr stream=1 duration_ms=4130 ttft_ms=2522 req_bytes=239617 res_bytes=727 finish=tool_calls in=55655 out=277 cached=55488 cost=0.012353 agent=369052e2 attempt=0
+2026-10-01 20:47:24.034 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:47:24.049 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:47:24.057 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:47:24.074 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-01 20:47:24.074 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=message class=ResponseOutputMessage
+2026-10-01 20:47:24.074 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:47:24.079 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:24.354 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 11 complete, next_step type=NextStepRunAgain
+2026-10-01 20:47:24.451 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 12, current_agent=Recon & Mapping Agent — Auth Flows
+2026-10-01 20:47:24.451 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:24.454 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:47:24.457 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:24.463 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:47:26.847 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867841-gsQ5L3mwnwz96qVmXvTh response_id=gen-1790867841-gsQ5L3mwnwz96qVmXvTh stream=1 duration_ms=5875 ttft_ms=2147 req_bytes=253073 res_bytes=727 finish=tool_calls in=59514 out=357 cached=59328 cost=0.013477 agent=a4573e87 attempt=0
+2026-10-01 20:47:26.948 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:47:26.967 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:47:26.985 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:47:26.988 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-01 20:47:26.989 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=message class=ResponseOutputMessage
+2026-10-01 20:47:26.991 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:47:26.998 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:27.192 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 11 complete, next_step type=NextStepRunAgain
+2026-10-01 20:47:27.253 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 12, current_agent=Recon & Mapping Agent
+2026-10-01 20:47:27.254 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:27.266 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:47:27.268 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:27.273 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:47:27.608 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867845-QShkdS2vlob0vVAuXTIO response_id=gen-1790867845-QShkdS2vlob0vVAuXTIO stream=1 duration_ms=3124 ttft_ms=3038 req_bytes=240152 res_bytes=681 finish=tool_calls in=55743 out=29 cached=55552 cost=0.011280 agent=369052e2 attempt=0
+2026-10-01 20:47:27.750 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:47:27.767 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:47:27.774 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:47:27.781 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:47:27.787 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:27.968 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 12 complete, next_step type=NextStepRunAgain
+2026-10-01 20:47:28.040 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 13, current_agent=Recon & Mapping Agent — Auth Flows
+2026-10-01 20:47:28.041 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:28.049 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:47:28.050 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:28.054 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:47:34.598 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867849-3MdK3hc3pyic1btIW0Sy response_id=gen-1790867849-3MdK3hc3pyic1btIW0Sy stream=1 duration_ms=7309 ttft_ms=4259 req_bytes=253635 res_bytes=725 finish=tool_calls in=59612 out=301 cached=59392 cost=0.013251 agent=a4573e87 attempt=0
+2026-10-01 20:47:34.714 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:47:34.729 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:47:34.740 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:47:34.768 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-01 20:47:34.769 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:47:34.771 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:35.038 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 12 complete, next_step type=NextStepRunAgain
+2026-10-01 20:47:35.147 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 13, current_agent=Recon & Mapping Agent
+2026-10-01 20:47:35.148 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:35.152 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:47:35.153 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:35.157 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:47:36.522 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867852-EwIPqTLqNHZ9y3p2PMbe response_id=gen-1790867852-EwIPqTLqNHZ9y3p2PMbe stream=1 duration_ms=8450 ttft_ms=5542 req_bytes=240510 res_bytes=853 finish=tool_calls in=55801 out=498 cached=55616 cost=0.013355 agent=369052e2 attempt=0
+2026-10-01 20:47:36.639 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:47:36.653 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:47:36.666 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:47:36.668 INFO    petcare-udee-onrender-com_4199 - strix.core.execution: sub-agent 369052e2 stopped at the budget reserve: Sub-agent budget reserve reached: spent $0.4548 of $0.50 (>= 90% reserve); stopping this sub-agent so the root agent can finish the scan.
+2026-10-01 20:47:36.669 INFO    petcare-udee-onrender-com_4199 - strix.core.agents: agent.status 369052e2=stopped
+2026-10-01 20:47:36.684 INFO    petcare-udee-onrender-com_4199 - strix.core.execution: child 369052e2 stopped at the sub-agent budget reserve
+2026-10-01 20:47:36.768 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tool wait_for_agents completed.
+2026-10-01 20:47:36.770 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 5 complete, next_step type=NextStepRunAgain
+2026-10-01 20:47:36.850 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 6, current_agent=Root Agent
+2026-10-01 20:47:36.851 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:36.856 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:47:36.857 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:36.866 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:47:41.249 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867858-fdZyu6wmn35hisp9W4id response_id=gen-1790867858-fdZyu6wmn35hisp9W4id stream=1 duration_ms=4362 ttft_ms=4262 req_bytes=248274 res_bytes=855 finish=tool_calls in=57334 out=111 cached=56896 cost=0.009067 agent=46fd129b attempt=0
+2026-10-01 20:47:41.418 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:47:41.434 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:47:41.446 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:47:41.455 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-01 20:47:41.455 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=message class=ResponseOutputMessage
+2026-10-01 20:47:41.456 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:47:41.456 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:47:41.460 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:41.461 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:41.463 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Invoking tool list_reports
+2026-10-01 20:47:41.464 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Invoking tool list_coverage
+2026-10-01 20:47:41.466 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tool list_coverage completed.
+2026-10-01 20:47:41.467 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tool list_reports completed.
+2026-10-01 20:47:41.469 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 6 complete, next_step type=NextStepRunAgain
+2026-10-01 20:47:41.551 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 7, current_agent=Root Agent
+2026-10-01 20:47:41.551 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:41.561 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:47:41.562 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:41.568 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:47:44.036 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867857-i76fHKQMLigxqNAns4L6 response_id=gen-1790867857-i76fHKQMLigxqNAns4L6 stream=1 duration_ms=8861 ttft_ms=6293 req_bytes=253993 res_bytes=682 finish=tool_calls in=59673 out=211 cached=59456 cost=0.012867 agent=a4573e87 attempt=0
+2026-10-01 20:47:44.151 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:47:44.167 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:47:44.179 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:47:44.182 INFO    petcare-udee-onrender-com_4199 - strix.core.execution: sub-agent a4573e87 stopped at the budget reserve: Sub-agent budget reserve reached: spent $0.4767 of $0.50 (>= 90% reserve); stopping this sub-agent so the root agent can finish the scan.
+2026-10-01 20:47:44.183 INFO    petcare-udee-onrender-com_4199 - strix.core.agents: agent.status a4573e87=stopped
+2026-10-01 20:47:44.189 INFO    petcare-udee-onrender-com_4199 - strix.core.execution: child a4573e87 stopped at the sub-agent budget reserve
+2026-10-01 20:47:47.553 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867865-M6JcGvpZlsCd1QDmUJ6z response_id=gen-1790867865-M6JcGvpZlsCd1QDmUJ6z stream=1 duration_ms=5960 ttft_ms=5500 req_bytes=249175 res_bytes=730 finish=tool_calls in=57474 out=77 cached=57152 cost=0.008791 agent=46fd129b attempt=0
+2026-10-01 20:47:47.763 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:47:47.779 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:47:47.787 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:47:47.789 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-01 20:47:47.790 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:47:47.797 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:47.799 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Invoking tool view_agent_graph
+2026-10-01 20:47:47.800 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tool view_agent_graph completed.
+2026-10-01 20:47:47.801 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 7 complete, next_step type=NextStepRunAgain
+2026-10-01 20:47:47.886 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Starting turn 8, current_agent=Root Agent
+2026-10-01 20:47:47.887 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:47.896 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: No conversation_id available for request
+2026-10-01 20:47:47.897 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:47.901 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Calling LLM
+2026-10-01 20:47:55.577 DEBUG   petcare-udee-onrender-com_4199 - strix.llm.request_log: llm_request route=litellm provider=openrouter model=z-ai/glm-5.3 host=openrouter.ai outcome=success status=200 request_id=gen-1790867869-Mmgrak5bf5IJQzDnzvtm response_id=gen-1790867869-Mmgrak5bf5IJQzDnzvtm stream=1 duration_ms=7659 ttft_ms=4961 req_bytes=249731 res_bytes=725 finish=tool_calls in=57598 out=798 cached=57280 cost=0.011976 agent=46fd129b attempt=0
+2026-10-01 20:47:55.708 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:47:55.717 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:47:55.729 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:47:55.732 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=reasoning class=ResponseReasoningItem
+2026-10-01 20:47:55.732 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=message class=ResponseOutputMessage
+2026-10-01 20:47:55.733 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Processing output item type=function_call class=ResponseFunctionToolCall
+2026-10-01 20:47:55.735 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tracing is disabled. Not creating span
+2026-10-01 20:47:55.736 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Invoking tool finish_scan
+2026-10-01 20:47:55.742 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Updated scan final fields
+2026-10-01 20:47:55.833 INFO    petcare-udee-onrender-com_4199 - strix.report.coverage: Saved coverage record to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\coverage.json (0 surface(s), 3 gap(s))
+2026-10-01 20:47:55.835 INFO    petcare-udee-onrender-com_4199 - strix.report.writer: Saved final penetration test report to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\penetration_test_report.md
+2026-10-01 20:47:55.846 INFO    petcare-udee-onrender-com_4199 - strix.report.sarif: Wrote SARIF 2.1.0 report: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199\findings.sarif (0 results)
+2026-10-01 20:47:55.851 INFO    petcare-udee-onrender-com_4199 - strix.report.state: Essential scan data saved to: C:\gw\iqAudi360 - main\iqaudi360_runs\petcare-udee-onrender-com_4199
+2026-10-01 20:47:55.858 DEBUG   petcare-udee-onrender-com_4199 - strix.telemetry.posthog: posthog disabled; skipping event scan_ended
+2026-10-01 20:47:55.862 DEBUG   petcare-udee-onrender-com_4199 - strix.telemetry.scarf: scarf disabled; skipping event scan_ended
+2026-10-01 20:47:55.863 INFO    petcare-udee-onrender-com_4199 - strix.tools.finish.tool: finish_scan: completed scan with 0 vulnerability report(s)
+2026-10-01 20:47:55.863 INFO    petcare-udee-onrender-com_4199 - strix.core.agents: agent.status 46fd129b=completed
+2026-10-01 20:47:55.868 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Tool finish_scan completed.
+2026-10-01 20:47:55.870 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Turn 8 complete, next_step type=NextStepFinalOutput
+2026-10-01 20:47:55.913 DEBUG   petcare-udee-onrender-com_4199 - openai.agents: Resetting current trace
+2026-10-01 20:47:55.920 INFO    petcare-udee-onrender-com_4199 - strix.core.runner: Tearing down sandbox session for scan petcare-udee-onrender-com_4199
+2026-10-01 20:47:57.168 INFO    petcare-udee-onrender-com_4199 - strix.runtime.session_manager: Cleaned up sandbox session for scan petcare-udee-onrender-com_4199
+2026-10-01 20:47:57.179 INFO    petcare-udee-onrender-com_4199 - strix.core.runner: iqAudi360 scan petcare-udee-onrender-com_4199 done

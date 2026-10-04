@@ -1,0 +1,81 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "iqAudi360",
+          "informationUri": "https://github.com/iqaudi360/iqaudi360",
+          "rules": [
+            {
+              "id": "iqaudi360-coverage/reconnaissance-attack-surface-mapping-tech-fingerprint-auth-model-endpoint-inventory",
+              "name": "Reconnaissance / attack-surface mapping (tech fingerprint, auth model, endpoint inventory)",
+              "shortDescription": {
+                "text": "Coverage: Reconnaissance / attack-surface mapping (tech fingerprint, auth model, endpoint inventory)"
+              },
+              "fullDescription": {
+                "text": "Coverage of Reconnaissance / attack-surface mapping (tech fingerprint, auth model, endpoint inventory) across the assessed attack surface."
+              },
+              "defaultConfiguration": {
+                "level": "none"
+              },
+              "help": {
+                "text": "Coverage of Reconnaissance / attack-surface mapping (tech fingerprint, auth model, endpoint inventory) across the assessed attack surface.",
+                "markdown": "Coverage of Reconnaissance / attack-surface mapping (tech fingerprint, auth model, endpoint inventory) across the assessed attack surface."
+              },
+              "properties": {
+                "tags": [
+                  "coverage"
+                ]
+              }
+            }
+          ],
+          "version": "1.6.2"
+        }
+      },
+      "results": [
+        {
+          "ruleId": "iqaudi360-coverage/reconnaissance-attack-surface-mapping-tech-fingerprint-auth-model-endpoint-inventory",
+          "ruleIndex": 0,
+          "kind": "open",
+          "level": "none",
+          "message": {
+            "text": "Reconnaissance / attack-surface mapping (tech fingerprint, auth model, endpoint inventory) — Requires further review: https://cloudmate.onrender.com/ (root page, response via proxy req id 1)\n\nTech stack and auth cookie confirmed (Flask/gunicorn on Render behind Cloudflare, signed session cookie without Secure/SameSite flags), but budget cut ended recon before JS endpoint extraction, /api fuzzing, and login/register route mapping. Proxy request ids 1-3 hold the baseline GET /."
+          },
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "https://cloudmate.onrender.com/ (root page, response via proxy req id 1)"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "iqaudi360": {
+              "coverage_outcome": "needs_follow_up",
+              "risk_area": "Reconnaissance / attack-surface mapping (tech fingerprint, auth model, endpoint inventory)",
+              "surface": "https://cloudmate.onrender.com/ (root page, response via proxy req id 1)",
+              "recorded_by": "Recon & Mapping Agent",
+              "source": "agent_reported"
+            }
+          }
+        }
+      ],
+      "invocations": [
+        {
+          "executionSuccessful": false,
+          "toolExecutionNotifications": [
+            {
+              "level": "warning",
+              "message": {
+                "text": "1 agent(s) did not finish cleanly (Recon & Mapping Agent); any surface they held is under-covered."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

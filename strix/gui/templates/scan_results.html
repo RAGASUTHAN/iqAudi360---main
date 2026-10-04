@@ -1,0 +1,431 @@
+{% extends "base.html" %}
+
+{% block title %}Results — {{ scan.target }}{% endblock %}
+{% block page_heading %}Scan Results & Findings{% endblock %}
+
+{% block header_buttons %}
+<div style="display: flex; gap: 8px;">
+  <a href="{{ url_for('download_pdf_report', scan_id=scan.run_id) }}" class="btn btn-primary btn-sm" title="Generate & Download PDF Report">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+    Download PDF
+  </a>
+  <a href="{{ url_for('download_sarif', scan_id=scan.run_id) }}" class="btn btn-secondary btn-sm" title="Download SARIF 2.1.0">
+    SARIF
+  </a>
+  <a href="{{ url_for('download_coverage', scan_id=scan.run_id) }}" class="btn btn-secondary btn-sm" title="Download Coverage JSON">
+    Coverage
+  </a>
+</div>
+{% endblock %}
+
+{% block content %}
+<!-- Top Header Card -->
+<div class="card" style="margin-bottom: 24px;">
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
+    <div>
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+        <span class="badge-status {{ scan.status }}">{{ scan.status }}</span>
+        <span style="font-size: 12px; color: #64748b; font-family: var(--font-mono);">Run ID: {{ scan.run_id }}</span>
+      </div>
+      <h1 style="font-size: 22px; font-weight: 700; color: #fff;">{{ scan.target }}</h1>
+      <div style="display: flex; gap: 16px; margin-top: 6px; font-size: 12px; color: #94a3b8;">
+        <span>Mode: <strong style="color: #fff; text-transform: uppercase;">{{ scan.scan_mode }}</strong></span>
+        <span>Duration: <strong style="color: #fff;">{{ scan.duration }}</strong></span>
+        <span>Started: <strong style="color: #fff;">{{ scan.start_time | time_format }}</strong></span>
+      </div>
+    </div>
+
+    <!-- Quick Download Action Group -->
+    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+      <a href="{{ url_for('download_sarif', scan_id=scan.run_id) }}" class="btn btn-secondary btn-sm">Download SARIF</a>
+      <a href="{{ url_for('download_json', scan_id=scan.run_id) }}" class="btn btn-secondary btn-sm">Download JSON</a>
+      <a href="{{ url_for('download_coverage', scan_id=scan.run_id) }}" class="btn btn-secondary btn-sm">Download Coverage</a>
+      {% if scan.has_report %}
+      <a href="{{ url_for('download_markdown_report', scan_id=scan.run_id) }}" class="btn btn-secondary btn-sm">Markdown Report</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- Severity Metric Cards -->
+<div class="stats-grid">
+  <div class="stat-card" style="--card-accent: #3b82f6;">
+    <span class="stat-label">Total Findings</span>
+    <span class="stat-value">{{ scan.severity_counts.total }}</span>
+    <span class="stat-sub">Validated alerts</span>
+  </div>
+
+  <div class="stat-card" style="--card-accent: #ef4444;">
+    <span class="stat-label">Critical</span>
+    <span class="stat-value" style="color: #ef4444;">{{ scan.severity_counts.critical }}</span>
+    <span class="stat-sub">Immediate remediation</span>
+  </div>
+
+  <div class="stat-card" style="--card-accent: #f97316;">
+    <span class="stat-label">High</span>
+    <span class="stat-value" style="color: #f97316;">{{ scan.severity_counts.high }}</span>
+    <span class="stat-sub">High severity</span>
+  </div>
+
+  <div class="stat-card" style="--card-accent: #eab308;">
+    <span class="stat-label">Medium</span>
+    <span class="stat-value" style="color: #eab308;">{{ scan.severity_counts.medium }}</span>
+    <span class="stat-sub">Medium risk</span>
+  </div>
+
+  <div class="stat-card" style="--card-accent: #06b6d4;">
+    <span class="stat-label">Low</span>
+    <span class="stat-value" style="color: #06b6d4;">{{ scan.severity_counts.low }}</span>
+    <span class="stat-sub">Informational & Low</span>
+  </div>
+</div>
+
+<!-- Tabs Navigation -->
+<div style="display: flex; gap: 8px; border-bottom: 1px solid var(--border-subtle); margin-bottom: 24px;">
+  <button class="tab-btn active" onclick="switchTab('findingsTab', this)">
+    Findings ({{ scan.findings | length }})
+  </button>
+  <button class="tab-btn" onclick="switchTab('coverageTab', this)">
+    Coverage & Scope
+  </button>
+  {% if current_role != 'CLIENT' %}
+  <button class="tab-btn" onclick="switchTab('agentsTab', this)">
+    Agent Topology ({{ scan.agents | length }})
+  </button>
+  {% endif %}
+  <button class="tab-btn" onclick="switchTab('sarifTab', this)">
+    SARIF Document
+  </button>
+  {% if current_role != 'CLIENT' %}
+  <button class="tab-btn" onclick="switchTab('logsTab', this)">
+    Execution Log
+  </button>
+  {% endif %}
+</div>
+
+<!-- Tab 1: Findings List -->
+<div id="findingsTab" class="tab-pane active">
+  <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+    <!-- Findings Cards -->
+    <div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <div style="display: flex; gap: 6px;">
+          <button class="filter-pill active" onclick="filterFindings('all', this)">All</button>
+          <button class="filter-pill" onclick="filterFindings('critical', this)">Critical</button>
+          <button class="filter-pill" onclick="filterFindings('high', this)">High</button>
+          <button class="filter-pill" onclick="filterFindings('medium', this)">Medium</button>
+          <button class="filter-pill" onclick="filterFindings('low', this)">Low</button>
+        </div>
+        <input 
+          type="text" 
+          id="findingSearchInput" 
+          class="form-control" 
+          placeholder="Search findings..." 
+          style="width: 200px; padding: 6px 12px; font-size: 12px;"
+          onkeyup="searchFindings(this.value)"
+        >
+      </div>
+
+      {% if not scan.findings %}
+      <div class="card empty-state" style="padding: 40px 20px;">
+        <div style="font-size: 32px; margin-bottom: 8px;">🛡️</div>
+        <h3 style="color: #fff; font-size: 16px; margin-bottom: 4px;">No vulnerabilities detected</h3>
+        <p style="color: #64748b; font-size: 13px;">No security vulnerabilities were identified in the scanned scope.</p>
+      </div>
+      {% else %}
+      <div id="findingsContainer" style="display: flex; flex-direction: column; gap: 12px;">
+        {% for f in scan.findings %}
+        <div class="card finding-row" data-severity="{{ f.severity }}" data-title="{{ f.title | lower }}" style="padding: 18px; cursor: pointer;" onclick="openFindingModal({{ f | tojson }})">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span class="badge badge-{{ f.severity }}">{{ f.severity | upper }}</span>
+              <span style="font-size: 11px; color: #64748b; font-family: var(--font-mono);">{{ f.id }}</span>
+              <span style="font-size: 11px; color: #94a3b8; background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 4px;">{{ f.cwe }}</span>
+            </div>
+            <span style="color: var(--accent-cyan); font-size: 12px; font-weight: 600;">View Details &rarr;</span>
+          </div>
+
+          <h3 style="font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 6px;">{{ f.title }}</h3>
+          <div style="font-size: 12px; color: #64748b; margin-bottom: 8px;">Target / Path: <span style="color: #cbd5e1; font-family: var(--font-mono);">{{ f.target }}</span></div>
+          <div style="font-size: 13px; color: #94a3b8; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+            {{ f.description }}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Severity Chart & Details Summary -->
+    <div>
+      <div class="card" style="margin-bottom: 20px;">
+        <div class="card-header">
+          <div class="card-title">Severity Breakdown</div>
+        </div>
+        <div id="scanResultSeverityChart" style="padding: 10px 0;"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Scan Metadata</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
+          <div><span style="color: #64748b;">Scan Engine:</span> <strong style="color: #fff;">iqAudi360 v1.6.2</strong></div>
+          <div><span style="color: #64748b;">Target Type:</span> <strong style="color: #fff;">{{ scan.scan_mode | upper }}</strong></div>
+          <div><span style="color: #64748b;">Agents Executed:</span> <strong style="color: #fff;">{{ scan.agents | length }}</strong></div>
+          <div><span style="color: #64748b;">Raw Storage:</span> <span style="font-family: var(--font-mono); color: #94a3b8; font-size: 11px;">{{ scan.run_dir }}</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tab 2: Coverage & Scope -->
+<div id="coverageTab" class="tab-pane" style="display: none;">
+  <div class="card" style="margin-bottom: 24px;">
+    <div class="card-header">
+      <div class="card-title">Attack Surface Coverage</div>
+      {% if scan.coverage and scan.coverage.completeness %}
+        <span class="badge badge-status {% if scan.coverage.completeness.complete %}completed{% else %}interrupted{% endif %}">
+          {% if scan.coverage.completeness.complete %}COMPLETE{% else %}PARTIAL / INCOMPLETE{% endif %}
+        </span>
+      {% endif %}
+    </div>
+
+    {% if scan.coverage %}
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 20px;">
+        <div style="background: rgba(0,0,0,0.3); padding: 14px; border-radius: var(--radius-sm);">
+          <div style="font-size: 11px; color: #64748b; text-transform: uppercase;">Surfaces Reviewed</div>
+          <div style="font-size: 24px; font-weight: 700; color: #00d2ff;">{{ scan.coverage.summary.surfaces_reviewed if scan.coverage.summary else 0 }}</div>
+        </div>
+
+        <div style="background: rgba(0,0,0,0.3); padding: 14px; border-radius: var(--radius-sm);">
+          <div style="font-size: 11px; color: #64748b; text-transform: uppercase;">Findings Filed</div>
+          <div style="font-size: 24px; font-weight: 700; color: #fff;">{{ scan.coverage.summary.findings_filed if scan.coverage.summary else 0 }}</div>
+        </div>
+
+        <div style="background: rgba(0,0,0,0.3); padding: 14px; border-radius: var(--radius-sm);">
+          <div style="font-size: 11px; color: #64748b; text-transform: uppercase;">Coverage Gaps Recorded</div>
+          <div style="font-size: 24px; font-weight: 700; color: #f59e0b;">{{ scan.coverage.summary.gaps if scan.coverage.summary else 0 }}</div>
+        </div>
+      </div>
+
+      {% if scan.coverage.completeness and scan.coverage.completeness.caveats %}
+      <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 20px;">
+        <h4 style="color: #fde047; font-size: 13px; margin-bottom: 8px;">Scope & Completeness Caveats</h4>
+        <ul style="padding-left: 20px; font-size: 12px; color: #cbd5e1; line-height: 1.6;">
+          {% for c in scan.coverage.completeness.caveats %}
+          <li>{{ c }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      {% if scan.coverage.gaps %}
+      <div style="margin-top: 20px;">
+        <h4 style="color: #fff; font-size: 14px; margin-bottom: 12px;">Identified Scope Gaps</h4>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          {% for g in scan.coverage.gaps %}
+          <div style="padding: 10px 14px; background: rgba(0,0,0,0.25); border-left: 3px solid #f59e0b; font-size: 12px;">
+            <strong style="color: #fff;">{{ g.agent_name or g.kind }}:</strong>
+            <span style="color: #94a3b8; margin-left: 6px;">{{ g.detail }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+    {% else %}
+      <div class="empty-state" style="padding: 30px;">
+        <p>No coverage.json file found for this scan.</p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Tab 3: Agent Topology -->
+<div id="agentsTab" class="tab-pane" style="display: none;">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Autonomous Agents Topology</div>
+      <span style="font-size: 12px; color: #64748b;">Multi-Agent Orchestration Graph</span>
+    </div>
+
+    {% if not scan.agents %}
+    <div class="empty-state" style="padding: 30px;">
+      <p>No agent records observed for this scan run.</p>
+    </div>
+    {% else %}
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      {% for a in scan.agents %}
+      <div class="agent-item" style="display: block; padding: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="color: #10b981; font-weight: bold;">✓</span>
+            <div>
+              <strong style="color: #fff; font-size: 15px;">{{ a.name }}</strong>
+              {% if a.is_root %}<span class="badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc; margin-left: 8px;">ROOT COORDINATOR</span>{% endif %}
+            </div>
+          </div>
+          <span class="badge badge-status {{ a.status }}">{{ a.status | upper }}</span>
+        </div>
+
+        {% if a.task %}
+        <div style="margin-top: 8px; font-size: 12px; color: #94a3b8; background: rgba(0,0,0,0.3); padding: 10px; border-radius: var(--radius-sm); line-height: 1.5;">
+          <strong style="color: #64748b;">Task:</strong> {{ a.task }}
+        </div>
+        {% endif %}
+
+        {% if a.skills %}
+        <div style="margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap;">
+          {% for sk in a.skills %}
+          <span style="background: rgba(0, 210, 255, 0.1); border: 1px solid rgba(0, 210, 255, 0.25); color: #00d2ff; font-size: 11px; padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono);">
+            {{ sk }}
+          </span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Tab 4: Raw SARIF Document -->
+<div id="sarifTab" class="tab-pane" style="display: none;">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">SARIF 2.1.0 (OASIS Standard)</div>
+      <a href="{{ url_for('download_sarif', scan_id=scan.run_id) }}" class="btn btn-primary btn-sm">Download findings.sarif</a>
+    </div>
+    <div style="font-size: 12px; color: #94a3b8; margin-bottom: 16px;">
+      Direct SARIF output generated by iqAudi360. Compatible with GitHub Code Scanning, DefectDojo, and ASPM platforms.
+    </div>
+    <div class="terminal-window">
+      <div class="terminal-body" style="max-height: 500px; color: #a5f3fc;">
+{% if scan.has_sarif %}
+<pre id="sarifJsonBlock" style="margin: 0; font-family: var(--font-mono); font-size: 12px;"></pre>
+{% else %}
+// No findings.sarif generated for this scan.
+{% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tab 5: Execution Log -->
+<div id="logsTab" class="tab-pane" style="display: none;">
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="terminal-dots">
+        <div class="terminal-dot red"></div>
+        <div class="terminal-dot yellow"></div>
+        <div class="terminal-dot green"></div>
+      </div>
+      <div class="terminal-title">iqAudi360 Execution Log (Last 300 Lines)</div>
+    </div>
+    <div class="terminal-body" style="max-height: 500px;">
+      {% for line in scan.log_lines %}
+      <div class="terminal-line">{{ line }}</div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<style>
+  .tab-btn {
+    background: none;
+    border: none;
+    padding: 12px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dim);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: var(--transition);
+  }
+  .tab-btn:hover { color: #fff; }
+  .tab-btn.active {
+    color: var(--accent-cyan);
+    border-bottom-color: var(--accent-cyan);
+  }
+  .filter-pill {
+    background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+    padding: 5px 12px;
+    border-radius: var(--radius-full);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .filter-pill:hover, .filter-pill.active {
+    background: var(--accent-cyan);
+    color: #000;
+    border-color: var(--accent-cyan);
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const counts = {
+      total: {{ scan.severity_counts.total }},
+      critical: {{ scan.severity_counts.critical }},
+      high: {{ scan.severity_counts.high }},
+      medium: {{ scan.severity_counts.medium }},
+      low: {{ scan.severity_counts.low }},
+    };
+    renderSeverityDonut("scanResultSeverityChart", counts);
+
+    // Fetch raw SARIF if tab is clicked
+    fetch("{{ url_for('download_sarif', scan_id=scan.run_id) }}")
+      .then(res => res.json())
+      .then(sarif => {
+        const block = document.getElementById("sarifJsonBlock");
+        if (block) {
+          block.textContent = JSON.stringify(sarif, null, 2);
+        }
+      })
+      .catch(() => {});
+  });
+
+  function switchTab(tabId, btn) {
+    document.querySelectorAll(".tab-pane").forEach(p => p.style.display = "none");
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    const target = document.getElementById(tabId);
+    if (target) target.style.display = "block";
+    btn.classList.add("active");
+  }
+
+  function filterFindings(sev, btn) {
+    document.querySelectorAll(".filter-pill").forEach(p => p.classList.remove("active"));
+    btn.classList.add("active");
+
+    const rows = document.querySelectorAll(".finding-row");
+    rows.forEach(r => {
+      if (sev === "all" || r.getAttribute("data-severity") === sev) {
+        r.style.display = "block";
+      } else {
+        r.style.display = "none";
+      }
+    });
+  }
+
+  function searchFindings(query) {
+    const q = (query || "").toLowerCase().trim();
+    const rows = document.querySelectorAll(".finding-row");
+    rows.forEach(r => {
+      const title = r.getAttribute("data-title") || "";
+      if (!q || title.includes(q)) {
+        r.style.display = "block";
+      } else {
+        r.style.display = "none";
+      }
+    });
+  }
+</script>
+{% endblock %}

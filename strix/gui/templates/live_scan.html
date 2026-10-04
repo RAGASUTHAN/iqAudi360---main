@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% block title %}Live Scan — {{ job.target }}{% endblock %}
+{% block page_heading %}Live Scan Monitor{% endblock %}
+
+{% block header_buttons %}
+<div class="live-status-group" id="headerLiveStatusGroup">
+  <div id="livePulseTag" class="live-indicator-badge" style="display: {% if job.status in ('running', 'starting') %}inline-flex{% else %}none{% endif %};">
+    <span class="live-pulse-dot"></span>
+    <span class="live-text" id="liveIndicatorText">{% if job.status == 'starting' %}INITIALIZING{% else %}LIVE SCAN{% endif %}</span>
+  </div>
+
+  <span id="scanStatusBadge" class="badge badge-status {{ job.status }}">
+    {{ job.status | upper }}
+  </span>
+
+  {% if current_role != 'CLIENT' %}
+  <button id="stopScanBtn" class="btn btn-stop-scan" title="Stop the currently running security scan" style="display: {% if job.status in ('running', 'starting') %}inline-flex{% else %}none{% endif %};" onclick="openStopModal()">
+    <span class="stop-icon">■</span>
+    Stop Scan
+  </button>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block content %}
+<!-- Live Status Bar -->
+<div class="card" style="margin-bottom: 24px;">
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
+    <div>
+      <span style="font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: 700; letter-spacing: 0.5px;">Target</span>
+      <h2 style="font-size: 20px; font-weight: 700; color: #fff; word-break: break-all;">{{ job.target }}</h2>
+      <div style="font-size: 12px; color: #94a3b8; font-family: var(--font-mono); margin-top: 2px;">
+        ID: <span id="displayRunName">{{ job.run_name }}</span>
+      </div>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
+      <div>
+        <span style="font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: 700;">Scan Mode</span>
+        <div style="font-size: 15px; font-weight: 700; color: #a855f7; text-transform: uppercase;">{{ job.scan_mode }}</div>
+      </div>
+
+      <div>
+        <span style="font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: 700;">Execution State</span>
+        <div style="display: flex; align-items: center; gap: 8px; margin-top: 2px;">
+          <span id="liveStatusPill" class="badge badge-status {{ job.status }}">
+            {{ job.status | upper }}
+          </span>
+        </div>
+      </div>
+
+      <div>
+        <span style="font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: 700;">Live Findings</span>
+        <div id="liveFindingsCounter" style="font-size: 20px; font-weight: 800; color: #00d2ff;">0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Completed Banner (Hidden by default) -->
+  <div id="completedBanner" style="display: none; margin-top: 20px; padding: 16px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-sm);">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="color: #10b981; font-size: 20px;">✓</span>
+        <div>
+          <strong style="color: #fff;">Penetration Test Execution Concluded</strong>
+          <div style="font-size: 12px; color: #94a3b8;">Scanner finished. Redirecting to comprehensive results...</div>
+        </div>
+      </div>
+      <a id="viewResultsLink" href="{{ url_for('scan_view', scan_id=job.run_name) }}" class="btn btn-primary btn-sm">
+        View Full Results &rarr;
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Two-Column Layout: Agents & Live Logs -->
+<div style="display: grid; grid-template-columns: 1fr 2fr; gap: 24px;">
+  <!-- Left: Multi-Agent Activity Panel -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Agent Activity
+      </div>
+      <span class="badge badge-status running" style="font-size: 10px;">MULTI-AGENT</span>
+    </div>
+
+    <div class="agent-pipeline" id="agentActivityList">
+      <div class="agent-item running">
+        <div class="agent-name">
+          <span class="status-dot-pulse" style="background:#00d2ff; box-shadow:0 0 8px #00d2ff;"></span>
+          <div>
+            <div>Initializing Execution Environment</div>
+            <div style="font-size: 11px; color: #64748b;">Docker Sandbox & LLM Warmup</div>
+          </div>
+        </div>
+        <span class="badge badge-status running">ACTIVE</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px; font-size: 12px; color: #64748b; border-top: 1px solid var(--border-subtle); padding-top: 14px;">
+      ℹ️ Stages and sub-agents reflect the autonomous execution graph recorded by iqAudi360.
+    </div>
+  </div>
+
+  <!-- Right: Real-time Terminal Log Stream -->
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="terminal-dots">
+        <div class="terminal-dot red"></div>
+        <div class="terminal-dot yellow"></div>
+        <div class="terminal-dot green"></div>
+      </div>
+      <div class="terminal-title">LIVE PROCESS STREAM // iqAudi360 Execution Feed</div>
+      <div style="display: flex; gap: 8px;">
+        <button id="clearLogsBtn" class="btn btn-secondary btn-sm" style="padding: 3px 8px; font-size: 11px;">
+          Clear Logs
+        </button>
+        <button onclick="copyTerminalLogs()" class="btn btn-secondary btn-sm" style="padding: 3px 8px; font-size: 11px;">
+          Copy
+        </button>
+      </div>
+    </div>
+    <div class="terminal-body" id="terminalLogs">
+      <div class="terminal-line" style="color: #64748b;">Connecting to scanner stream...</div>
+    </div>
+  </div>
+</div>
+
+<!-- Stop Scan Confirmation Modal -->
+<div class="modal-overlay" id="stopScanModal">
+  <div class="modal-card" style="max-width: 440px;">
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
+      <span style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: rgba(239, 68, 68, 0.15); color: #ef4444; font-size: 16px;">■</span>
+      <div>
+        <h3 style="color: #fff; font-size: 16px; font-weight: 700;">Stop this security scan?</h3>
+        <div style="font-size: 12px; color: #94a3b8;">This will terminate the currently running scan.</div>
+      </div>
+    </div>
+    <p style="font-size: 13px; color: #cbd5e1; line-height: 1.5; margin-bottom: 20px;">
+      The active sandbox and reasoning agents will be stopped cleanly. All surface coverage and findings discovered so far will be preserved in the scan records.
+    </p>
+    <div style="display: flex; justify-content: flex-end; gap: 10px;">
+      <button class="btn btn-secondary btn-sm" onclick="closeStopModal()">Cancel</button>
+      <button class="btn btn-danger btn-sm" id="confirmStopScanBtn" onclick="confirmStopScan()">
+        <span style="font-size: 10px;">■</span> Stop Scan
+      </button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/live_scan.js') }}"></script>
+<script>
+  let client;
+  document.addEventListener("DOMContentLoaded", () => {
+    client = new LiveScanClient("{{ scan_id }}");
+  });
+
+  function openStopModal() {
+    const modal = document.getElementById("stopScanModal");
+    if (modal) modal.classList.add("open");
+  }
+
+  function closeStopModal() {
+    const modal = document.getElementById("stopScanModal");
+    if (modal) modal.classList.remove("open");
+  }
+
+  function confirmStopScan() {
+    closeStopModal();
+    if (client) {
+      client.stopScan();
+    }
+  }
+
+  function copyTerminalLogs() {
+    const el = document.getElementById("terminalLogs");
+    if (el) {
+      copyToClipboard(el.innerText, "Console logs copied!");
+    }
+  }
+</script>
+{% endblock %}

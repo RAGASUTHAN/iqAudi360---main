@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Reports — iqAudi360 Security Platform{% endblock %}
+{% block page_heading %}Security Assessment Reports{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">Generated Assessment Reports</div>
+    <span style="font-size: 12px; color: #64748b;">PDF, SARIF 2.1.0, Coverage JSON, Markdown</span>
+  </div>
+
+  {% if not scans %}
+  <div class="empty-state" style="padding: 40px;">
+    <div class="empty-state-icon">📄</div>
+    <h3 style="color:#fff; font-size:16px; margin-bottom:6px;">No reports available</h3>
+    <p style="color:#64748b; font-size:13px;">Complete a security scan to generate downloadable audit reports.</p>
+  </div>
+  {% else %}
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Target / Run</th>
+          <th>Status</th>
+          <th>Findings</th>
+          <th>Date</th>
+          <th>Download Formats</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for s in scans %}
+        <tr>
+          <td>
+            <strong style="color: #fff;">{{ s.target }}</strong>
+            <div style="font-size: 11px; color: #64748b; font-family: var(--font-mono);">{{ s.run_id }}</div>
+          </td>
+          <td>
+            <span class="badge-status {{ s.status }}">{{ s.status }}</span>
+          </td>
+          <td>
+            <strong style="color: {% if s.findings_count > 0 %}#ef4444{% else %}#10b981{% endif %};">
+              {{ s.findings_count }}
+            </strong>
+          </td>
+          <td style="font-size: 12px; color: #94a3b8;">
+            {{ s.start_time | time_format }}
+          </td>
+          <td>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <a href="{{ url_for('download_pdf_report', scan_id=s.run_id) }}" class="btn btn-primary btn-sm" style="padding: 4px 10px; font-size: 11px;">
+                PDF
+              </a>
+              <a href="{{ url_for('download_sarif', scan_id=s.run_id) }}" class="btn btn-secondary btn-sm" style="padding: 4px 10px; font-size: 11px;">
+                SARIF
+              </a>
+              <a href="{{ url_for('download_coverage', scan_id=s.run_id) }}" class="btn btn-secondary btn-sm" style="padding: 4px 10px; font-size: 11px;">
+                Coverage
+              </a>
+              <a href="{{ url_for('download_json', scan_id=s.run_id) }}" class="btn btn-secondary btn-sm" style="padding: 4px 10px; font-size: 11px;">
+                JSON
+              </a>
+              <a href="{{ url_for('download_markdown_report', scan_id=s.run_id) }}" class="btn btn-secondary btn-sm" style="padding: 4px 10px; font-size: 11px;">
+                Markdown
+              </a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-04 11:09:54 UTC",
+  "run_id": "cloudmate-onrender-com_35fa",
+  "run_name": "cloudmate-onrender-com_35fa",
+  "scope": {
+    "targets": [
+      {
+        "type": "web_application",
+        "details": {
+          "target_url": "https://cloudmate.onrender.com/"
+        },
+        "original": "https://cloudmate.onrender.com/"
+      }
+    ],
+    "scan_mode": "quick",
+    "scope_mode": "auto",
+    "diff_scope": {
+      "active": false,
+      "mode": "auto"
+    },
+    "instruction": ""
+  },
+  "summary": {
+    "surfaces_reviewed": 1,
+    "outcomes": {
+      "needs_follow_up": 1
+    },
+    "findings_filed": 0,
+    "gaps": 1
+  },
+  "machine_observed": {
+    "agents": [
+      {
+        "agent_id": "e725f260",
+        "agent_name": "Recon & Mapping Agent",
+        "status": "stopped",
+        "skills": [
+          "reconnaissance/asset_discovery",
+          "tooling/katana",
+          "tooling/ffuf",
+          "tooling/httpx"
+        ],
+        "task": "Black-box reconnaissance and attack-surface mapping of https://cloudmate.onrender.com/ (the ONLY in-scope target — do not touch any other host/domain/IP).\n\nYour job is recon ONLY, not vulnerability exploitation. Deliverables:\n1. Technology fingerprint: server/framework headers, cookies, JS bundles, build tooling (e.g. React/Next/Vite), backend hints (Render.com hosting).\n2. Full content map: crawl the site with katana/gospider (bounded depth, e.g. depth 3-4) plus a small ffuf/dirsearch pass for hidden paths (use a small wordlist like common.txt; keep request counts modest). Record every endpoint, path, form, and parameter found.\n3. JS analysis: enumerate all loaded JS files, endpoints/API paths and secrets-looking strings inside them (note anything that looks like keys/tokens).\n4. Auth model: identify login/signup flows, roles, session cookies, JWT usage, OAuth integrations. If there are test/demo accounts indicated, note them (do not create destructive changes; creating a throwaway account on the app is allowed if needed for mapping).\n5. API surface: any /api/* endpoints, GraphQL, websockets.\n6. Write findings to shared notes with create_note (category \"wiki\" for the target map, \"general\" for observations) so later agents can build on them. Record coverage entries (record_coverage) for surfaces you mapped.\n7. After recon, call get_threat_model on https://cloudmate.onrender.com/ — if you observed enough to correct the baseline I'm about to write, use amend_threat_model.\n\nKeep total requests bounded (a few hundred max). Report back via agent_finish with: technology stack, endpoint inventory, auth model, JS findings, and any suspicious surfaces worth deeper testing.",
+        "is_root": false
+      },
+      {
+        "agent_id": "a97443e8",
+        "agent_name": "Root Agent",
+        "status": "completed",
+        "skills": [],
+        "task": "\n\nURLs: - https://cloudmate.onrender.com/",
+        "is_root": true
+      }
+    ],
+    "skills_exercised": [
+      "asset_discovery",
+      "ffuf",
+      "httpx",
+      "katana"
+    ],
+    "findings_filed": 0,
+    "source": "runtime"
+  },
+  "completeness": {
+    "complete": false,
+    "scan_status": "completed",
+    "exit_reason": "finished_by_tool",
+    "caveats": [
+      "1 agent(s) did not finish cleanly (Recon & Mapping Agent); any surface they held is under-covered."
+    ]
+  },
+  "entries": [
+    {
+      "surface": "https://cloudmate.onrender.com/ (root page, response via proxy req id 1)",
+      "risk_area": "Reconnaissance / attack-surface mapping (tech fingerprint, auth model, endpoint inventory)",
+      "outcome": "needs_follow_up",
+      "outcome_label": "Requires further review",
+      "evidence": "Tech stack and auth cookie confirmed (Flask/gunicorn on Render behind Cloudflare, signed session cookie without Secure/SameSite flags), but budget cut ended recon before JS endpoint extraction, /api fuzzing, and login/register route mapping. Proxy request ids 1-3 hold the baseline GET /.",
+      "recorded_by": "Recon & Mapping Agent",
+      "recorded_at": "2026-10-04 11:09:36 UTC",
+      "updated_at": "",
+      "previous_outcomes": [],
+      "source": "agent_reported"
+    }
+  ],
+  "gaps": [
+    {
+      "kind": "needs_follow_up",
+      "surface": "https://cloudmate.onrender.com/ (root page, response via proxy req id 1)",
+      "risk_area": "Reconnaissance / attack-surface mapping (tech fingerprint, auth model, endpoint inventory)",
+      "detail": "Tech stack and auth cookie confirmed (Flask/gunicorn on Render behind Cloudflare, signed session cookie without Secure/SameSite flags), but budget cut ended recon before JS endpoint extraction, /api fuzzing, and login/register route mapping. Proxy request ids 1-3 hold the baseline GET /."
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Scans History — iqAudi360{% endblock %}
+{% block page_heading %}Scans History{% endblock %}
+
+{% block header_buttons %}
+<a href="{{ url_for('new_scan') }}" class="btn btn-primary btn-sm">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+  New Scan
+</a>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">All Security Scans</div>
+    <span style="font-size: 12px; color: #64748b;">Read directly from <code>iqaudi360_runs/</code></span>
+  </div>
+
+  {% if not scans and not active_jobs %}
+  <div class="empty-state" style="padding: 40px;">
+    <div class="empty-state-icon">📂</div>
+    <h3 style="color:#fff; font-size:16px; margin-bottom:6px;">No scan history found</h3>
+    <p style="color:#64748b; font-size:13px; margin-bottom:16px;">Run your first security scan from the dashboard or CLI.</p>
+    <a href="{{ url_for('new_scan') }}" class="btn btn-primary">Start New Scan</a>
+  </div>
+  {% else %}
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Target</th>
+          <th>Scan Mode</th>
+          <th>Status</th>
+          <th>Findings</th>
+          <th>Started</th>
+          <th>Duration</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Active Background Scans -->
+        {% for job in active_jobs %}
+        <tr style="background: rgba(0, 210, 255, 0.04);">
+          <td>
+            <div style="font-weight: 600; color: #fff;">{{ job.target }}</div>
+            <div style="font-size: 11px; color: #00d2ff; font-family: var(--font-mono);">
+              <span class="status-dot-pulse" style="display:inline-block; margin-right:4px;"></span>
+              Active Job: {{ job.job_id }}
+            </div>
+          </td>
+          <td><span style="text-transform: uppercase; font-size: 11px;">{{ job.scan_mode }}</span></td>
+          <td><span class="badge-status running">RUNNING</span></td>
+          <td><span style="color: #94a3b8;">Scanning...</span></td>
+          <td>{{ job.start_time | time_format }}</td>
+          <td>Live</td>
+          <td>
+            <a href="{{ url_for('scan_view', scan_id=job.job_id) }}" class="btn btn-primary btn-sm">
+              Live Monitor
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+
+        <!-- Historical Scans -->
+        {% for s in scans %}
+        <tr>
+          <td>
+            <div style="font-weight: 600; color: #fff;">{{ s.target }}</div>
+            <div style="font-size: 11px; color: #64748b; font-family: var(--font-mono);">{{ s.run_id }}</div>
+          </td>
+          <td>
+            <span style="text-transform: uppercase; font-size: 11px; font-weight: 600; color: #94a3b8;">
+              {{ s.scan_mode }}
+            </span>
+          </td>
+          <td>
+            <span class="badge-status {{ s.status }}">
+              {{ s.status }}
+            </span>
+          </td>
+          <td>
+            <span style="font-weight: 700; color: {% if s.findings_count > 0 %}#ef4444{% else %}#10b981{% endif %};">
+              {{ s.findings_count }}
+            </span>
+            {% if s.findings_count > 0 %}
+            <span style="font-size: 11px; color: #64748b; margin-left: 4px;">
+              ({{ s.severity_counts.critical }}C / {{ s.severity_counts.high }}H)
+            </span>
+            {% endif %}
+          </td>
+          <td style="font-size: 12px; color: #94a3b8;">
+            {{ s.start_time | time_format }}
+          </td>
+          <td style="font-family: var(--font-mono); font-size: 12px;">
+            {{ s.duration }}
+          </td>
+          <td>
+            <a href="{{ url_for('scan_view', scan_id=s.run_id) }}" class="btn btn-secondary btn-sm">
+              View Results
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

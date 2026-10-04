@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register — iqAudi360 Security Platform</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+  <style>
+    .auth-page {
+      display: flex;
+      min-height: 100vh;
+      width: 100vw;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 60%), #080c14;
+      padding: 24px;
+    }
+    .auth-card {
+      width: 100%;
+      max-width: 440px;
+      background: rgba(14, 21, 36, 0.9);
+      border: 1px solid rgba(139, 92, 246, 0.25);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(139, 92, 246, 0.1);
+      backdrop-filter: blur(16px);
+      position: relative;
+      z-index: 1;
+    }
+    .auth-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .auth-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, #8b5cf6 0%, #00d2ff 100%);
+      color: #030712;
+      font-weight: 800;
+      font-size: 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 0 24px rgba(139, 92, 246, 0.4);
+    }
+    .auth-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #f1f5f9;
+      letter-spacing: -0.02em;
+    }
+    .auth-subtitle {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-top: 4px;
+    }
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .auth-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .auth-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #cbd5e1;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .auth-input {
+      background: rgba(3, 7, 18, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+      transition: var(--transition);
+    }
+    .auth-input:focus {
+      border-color: #8b5cf6;
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.25);
+    }
+    .auth-btn-primary {
+      background: linear-gradient(135deg, #8b5cf6 0%, #00d2ff 100%);
+      color: #030712;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 13px;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+      margin-top: 6px;
+    }
+    .auth-btn-primary:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.45);
+    }
+    .auth-btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .auth-footer {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+    .auth-link {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    .auth-link:hover {
+      text-decoration: underline;
+    }
+    .auth-alert {
+      background: var(--sev-critical-bg);
+      border: 1px solid var(--sev-critical-border);
+      color: #fca5a5;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      margin-bottom: 16px;
+      display: none;
+    }
+  </style>
+  <!-- Firebase Compat SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-auth-compat.js"></script>
+  <!-- Centralized Auth Helper -->
+  <script src="{{ url_for('static', filename='js/firebase-auth.js') }}"></script>
+</head>
+<body>
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="auth-logo">iq</div>
+        <h1 class="auth-title">Create Account</h1>
+        <p class="auth-subtitle">Join the iqAudi360 Security Platform</p>
+      </div>
+
+      <div id="authAlert" class="auth-alert"></div>
+
+      <form id="registerForm" class="auth-form">
+        <div class="auth-input-group">
+          <label class="auth-label" for="regName">Full Name</label>
+          <input type="text" id="regName" class="auth-input" placeholder="Alex Morgan" required autocomplete="name">
+        </div>
+
+        <div class="auth-input-group">
+          <label class="auth-label" for="regEmail">Work Email</label>
+          <input type="email" id="regEmail" class="auth-input" placeholder="alex@enterprise.com" required autocomplete="email">
+        </div>
+
+        <div class="auth-input-group">
+          <label class="auth-label" for="regPassword">Password</label>
+          <input type="password" id="regPassword" class="auth-input" placeholder="At least 6 characters" required minlength="6" autocomplete="new-password">
+        </div>
+
+        <div class="auth-input-group">
+          <label class="auth-label" for="regConfirmPassword">Confirm Password</label>
+          <input type="password" id="regConfirmPassword" class="auth-input" placeholder="Repeat your password" required minlength="6" autocomplete="new-password">
+        </div>
+
+        <button type="submit" id="regSubmitBtn" class="auth-btn-primary">
+          <span>CREATE ACCOUNT</span>
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        Already have an account?
+        <a href="{{ url_for('auth.login_page') }}" class="auth-link">Login</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const firebaseConfig = {{ firebase_config | tojson }};
+      window.__FIREBASE_CONFIG__ = firebaseConfig;
+      window.IqAuth.init(firebaseConfig);
+
+      const alertEl = document.getElementById("authAlert");
+      const form = document.getElementById("registerForm");
+      const submitBtn = document.getElementById("regSubmitBtn");
+
+      function showAlert(msg) {
+        alertEl.textContent = msg;
+        alertEl.style.display = "block";
+      }
+
+      function hideAlert() {
+        alertEl.style.display = "none";
+      }
+
+      form.addEventListener("submit", async function(e) {
+        e.preventDefault();
+        hideAlert();
+
+        const name = document.getElementById("regName").value.trim();
+        const email = document.getElementById("regEmail").value.trim();
+        const password = document.getElementById("regPassword").value;
+        const confirmPassword = document.getElementById("regConfirmPassword").value;
+
+        if (password !== confirmPassword) {
+          showAlert("Passwords do not match. Please re-enter.");
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Creating Account...";
+
+        try {
+          await window.IqAuth.register(email, password, name);
+          window.location.href = "{{ url_for('dashboard') }}";
+        } catch (err) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "CREATE ACCOUNT";
+          const friendlyMessage = window.IqAuth.formatErrorMessage(err);
+          showAlert(friendlyMessage);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
